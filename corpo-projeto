@@ -85,5 +85,5 @@ void Vender_criptomoedas (){
 	printf("6\n");
 };
 void Atualizar_cotacao (){
-	printf("7\n");
+	printf("777777\n");
 };
