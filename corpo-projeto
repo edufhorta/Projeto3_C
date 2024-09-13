@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+void menu ();
+void Efetuar_login ();
+void Consultar_reais  ();
+void Consultar_extrato  ();
+void Depositar_reais ();
+void Sacar_reais ();
+void Comprar_criptomoedas ();
+void Vender_criptomoedas ();
+void Atualizar_cotacao ();
+
+int main()
+{
+	setlocale(LC_ALL, "portuguese");
+
+	menu();
+	
+	system("pause");
+	return 0;
+}
+void menu(){
+
+	int cont;
+
+	while(1){
+		printf("Bem vindo ao menu!\n");
+		printf("O que você deseja acessar?\n");
+		printf("--------------------------\n");
+		printf("1-Consultar saldo de reais\n");
+		printf("2-Consultar extrato\n");
+		printf("3-Depositar reais\n");
+		printf("4-Sacar reais\n");
+		printf("5-Comprar criptomoedas:\n");
+		printf("6-Vender criptomoedas\n");
+		printf("7-Atualizar cotação\n");
+		scanf("%d", &cont);
+		break;
+	}
+	    switch (cont){
+			case 1:
+				Consultar_reais ();
+				break;
+			case 2:
+				Consultar_extrato ();
+				break;
+			case 3:
+				Depositar_reais ();
+				break;
+			case 4:
+				Sacar_reais ();
+				break;
+			case 5:
+				Comprar_criptomoedas ();
+				break;
+			case 6:
+				Vender_criptomoedas ();
+				break;
+			case 7:
+				Atualizar_cotacao ();
+				break;
+		}
+};
+void Efetuar_login (){
+    printf("0\n");
+};
+void Consultar_reais (){
+    printf("1\n");
+};
+void Consultar_extrato (){
+    printf("2\n");
+};
+void Depositar_reais (){
+	printf("3\n");
+};
+void Sacar_reais (){
+	printf("4\n");
+};
+void Comprar_criptomoedas (){
+	printf("5\n");
+};
+void Vender_criptomoedas (){
+	printf("6\n");
+};
+void Atualizar_cotacao (){
+	printf("7\n");
+};
