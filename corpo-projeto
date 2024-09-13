@@ -79,7 +79,23 @@ void Sacar_reais (){
 	printf("4\n");
 };
 void Comprar_criptomoedas (){
-	printf("5\n");
+	float bitcoin = 331467,13;
+    	float ripple = 3,15;
+    	float ethereum = 13081,32;
+    	int valor;
+    	while (1){
+        	printf("Deseja comprar qual moeda?\n");
+        	printf("/n")
+        	printf("Bitcoin: %i\n", bitcoin);
+        	printf("Ethereum: %i\n", ripple);
+        	printf("Ripple: %i\n", ethereum);
+        	scanf("%i/n", &valor);
+	        printf("/n")
+
+        	printf("Digite a senha para a validação:/n");
+        	scanf("%d");
+        
+    };
 };
 void Vender_criptomoedas (){
 	printf("6\n");
