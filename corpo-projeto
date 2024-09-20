@@ -79,11 +79,52 @@ void Sacar_reais (){
 	printf("4\n");
 };
 void Comprar_criptomoedas (){
-	printf("5\n");
+	
 };
 void Vender_criptomoedas (){
 	printf("6\n");
 };
-void Atualizar_cotacao (){
-	printf("777777\n");
+
+void Atualiza_cotacao(int indice){
+	float bit = 1.5;
+    	float rip = 2.5;
+    	float eth = 3.5;
+    	srand(time(NULL));
+
+	int i;
+	
+	for (i = 0; i < 3; i++) {
+	        int num = rand() % 100;
+
+		switch (i) {
+	            case 0:
+	                if (num % 2 == 0) {
+	                    bit = bit + ((5 / 100.0) * bit);
+	                } else {
+	                    bit = bit - ((5 / 100.0) * bit);
+	                }
+	                break;
+	
+	            case 1:
+	                if (num % 2 == 0) {
+	                    eth = eth + ((5 / 100.0) * eth);
+	                } else {
+	                    eth = eth - ((5 / 100.0) * eth);
+	                }
+	                break;
+	
+	            case 2:
+	                if (num % 2 == 0) {
+	                    rip = rip + ((5 / 100.0) * rip);
+	                } else {
+	                    rip = rip - ((5 / 100.0) * rip);
+	                }
+	                break;
+	
+	            default:
+	                break;
+	        }
+	}
+	
+	printf("Cotação atualizada\n");
 };
