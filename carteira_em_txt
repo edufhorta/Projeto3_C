@@ -1,0 +1,102 @@
+void carregarDados() {
+    FILE *file;
+    char line[MAX_LINE_LENGTH];
+    int i;
+
+    file = fopen("logins.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir logins.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;  // Remove newline character
+        strcpy(usuarios[i].login, line);
+        i++;
+    }
+    numUsuarios = i;
+    fclose(file);
+
+    file = fopen("cadastrosenhas.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir cadastrosenhas.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+    file = fopen("cadastronomes.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir cadastronomes.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].nome, line);
+        i++;
+    }
+    fclose(file);
+
+
+
+     file = fopen("carteira.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteira.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+     file = fopen("carteirabit.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+
+    file = fopen("carteiraeth.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+
+     file = fopen("carteiraxrp.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+}
