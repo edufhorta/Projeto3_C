@@ -1,0 +1,234 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+void menu ();
+void Efetuar_login ();
+void Consultar_reais  ();
+void Consultar_extrato  ();
+void Depositar_reais ();
+void Sacar_reais ();
+void Comprar_criptomoedas ();
+void Vender_criptomoedas ();
+void Atualizar_cotacao ();
+
+void carregarDados() {
+    FILE *file;
+    char line[MAX_LINE_LENGTH];
+    int i;
+
+    file = fopen("logins.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir logins.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;  // Remove newline character
+        strcpy(usuarios[i].login, line);
+        i++;
+    }
+    numUsuarios = i;
+    fclose(file);
+
+    file = fopen("cadastrosenhas.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir cadastrosenhas.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+    file = fopen("cadastronomes.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir cadastronomes.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].nome, line);
+        i++;
+    }
+    fclose(file);
+
+
+
+     file = fopen("carteira.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteira.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+     file = fopen("carteirabit.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+
+    file = fopen("carteiraeth.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+
+     file = fopen("carteiraxrp.txt", "r");
+    if (file == NULL) {
+        perror("Erro ao abrir carteirabit.txt");
+        exit(EXIT_FAILURE);
+    }
+    i = 0;
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0;
+        strcpy(usuarios[i].senha, line);
+        i++;
+    }
+    fclose(file);
+
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "portuguese");
+
+	menu();
+	
+	system("pause");
+	return 0;
+}
+void menu(){
+
+	int cont;
+
+	while(1){
+		printf("Bem vindo ao menu!\n");
+		printf("O que você deseja acessar?\n");
+		printf("--------------------------\n");
+		printf("1-Consultar saldo de reais\n");
+		printf("2-Consultar extrato\n");
+		printf("3-Depositar reais\n");
+		printf("4-Sacar reais\n");
+		printf("5-Comprar criptomoedas:\n");
+		printf("6-Vender criptomoedas\n");
+		printf("7-Atualizar cotação\n");
+		scanf("%d", &cont);
+		break;
+	}
+	    switch (cont){
+			case 1:
+				Consultar_reais ();
+				break;
+			case 2:
+				Consultar_extrato ();
+				break;
+			case 3:
+				Depositar_reais ();
+				break;
+			case 4:
+				Sacar_reais ();
+				break;
+			case 5:
+				Comprar_criptomoedas ();
+				break;
+			case 6:
+				Vender_criptomoedas ();
+				break;
+			case 7:
+				Atualizar_cotacao ();
+				break;
+		}
+};
+void Efetuar_login (){
+    printf("0\n");
+};
+void Consultar_reais (){
+    printf("1\n");
+};
+void Consultar_extrato (){
+    printf("2\n");
+};
+void Depositar_reais (){
+	printf("3\n");
+};
+void Sacar_reais (){
+	printf("4\n");
+};
+void Comprar_criptomoedas (){
+	
+};
+void Vender_criptomoedas (){
+	printf("6\n");
+};
+
+void Atualiza_cotacao(int indice){
+	float bit = 1.5;
+    	float rip = 2.5;
+    	float eth = 3.5;
+    	srand(time(NULL));
+
+	int i;
+	
+	for (i = 0; i < 3; i++) {
+	        int num = rand() % 100;
+
+		switch (i) {
+	            case 0:
+	                if (num % 2 == 0) {
+	                    bit = bit + ((5 / 100.0) * bit);
+	                } else {
+	                    bit = bit - ((5 / 100.0) * bit);
+	                }
+	                break;
+	
+	            case 1:
+	                if (num % 2 == 0) {
+	                    eth = eth + ((5 / 100.0) * eth);
+	                } else {
+	                    eth = eth - ((5 / 100.0) * eth);
+	                }
+	                break;
+	
+	            case 2:
+	                if (num % 2 == 0) {
+	                    rip = rip + ((5 / 100.0) * rip);
+	                } else {
+	                    rip = rip - ((5 / 100.0) * rip);
+	                }
+	                break;
+	
+	            default:
+	                break;
+	        }
+	}
+	
+	printf("Cotação atualizada\n");
+};
