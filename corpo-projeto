@@ -1,13 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include <locale.h>
+#define NUM_OF_USERS 10
 float bit = 342.089;
 float rip =  3.18;
 float eth = 12.980;
+char cpf[12];
+char senha[6];
+char cpf_lista[NUM_OF_USERS][12];
+char senha_lista[NUM_OF_USERS][7];
+float carteira[NUM_OF_USERS]={};
+float carteiraBit[NUM_OF_USERS]={};
+float carteiraEth[NUM_OF_USERS]={};
+float carteiraXrp[NUM_OF_USERS]={};
+int indice;
+int i = 0;
 
-float bit = 342.08;
-float rip =  3.18;
-float eth = 12.98;
 
 void menu ();
 void Efetuar_login ();
@@ -183,3 +193,4 @@ void Atualiza_cotacao(int indice){
     	getchar(); 
     	return 0
 };
+
