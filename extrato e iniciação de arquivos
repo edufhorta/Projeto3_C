@@ -13,7 +13,7 @@ float carteiraEth[NUM_OF_USERS]={};
 float carteiraXrp[NUM_OF_USERS]={};
 int indice;
 int i = 0;
-// apenas senha e cpf
+// apenas senha e cpf para o login
 void iniciacao_arquivos() {
   char linha[100];
   FILE *cpfss;
@@ -41,7 +41,7 @@ void iniciacao_arquivos() {
 
   fclose(senhass);
 
-//os saldos agora
+//iniciação dos saldos agora
      FILE *carteirafile;
      FILE *carteirabitfile;
      FILE *carteiraethfile;
