@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+float bit = 342.089;
+float rip =  3.18;
+float eth = 12.980;
 
 void menu ();
 void Efetuar_login ();
@@ -86,9 +89,6 @@ void Vender_criptomoedas (){
 };
 
 void Atualiza_cotacao(int indice){
-	float bit = 1.5;
-    	float rip = 2.5;
-    	float eth = 3.5;
     	srand(time(NULL));
 
 	int i;
