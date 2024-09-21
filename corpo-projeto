@@ -18,18 +18,6 @@ float carteiraXrp[NUM_OF_USERS]={};
 int indice;
 int i = 0;
 
-
-void menu ();
-void Efetuar_login ();
-void mostrarSaldo  ();
-void Consultar_extrato  ();
-void Depositar_reais ();
-void Sacar_reais ();
-void Comprar_criptomoedas ();
-void Vender_criptomoedas ();
-void Atualizar_cotacao ();
-void Cotacao_inicial ();
-
 //CARREGAMENTO DOS ARQUIVOS.
 void iniciacao_arquivos() {
    FILE *cpfss = fopen("cpfs.bin", "r"); // Open the binary file in read mode
@@ -152,67 +140,8 @@ void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteir
      size_t escrevendoxrp = fwrite(carteiraXrp, sizeof(float),10,carteiraxrpfile);
      fclose(carteiraxrpfile);
 
-}
-
-int main()
-{
-	setlocale(LC_ALL, "portuguese");
-
-	menu();
-	
-	system("pause");
-	return 0;
-}
-void menu(){
-
-	int cont;
-
-	while(1){
-		printf("Bem vindo ao menu!\n");
-		printf("O que você deseja acessar?\n");
-		printf("--------------------------\n");
-		printf("1-Consultar saldo\n");
-		printf("2-Consultar extrato\n");
-		printf("3-Depositar reais\n");
-		printf("4-Sacar reais\n");
-		printf("5-Comprar criptomoedas:\n");
-		printf("6-Vender criptomoedas\n");
-		printf("7-Atualizar cotação\n");
-		printf("8-Sair\n");
-		scanf("%d", &cont);
-		break;
-	}
-	    switch (cont){
-			case 1:
-				mostrarSaldo ();
-				break;
-			case 2:
-				Consultar_extrato ();
-				break;
-			case 3:
-				Depositar_reais ();
-				break;
-			case 4:
-				Sacar_reais ();
-				break;
-			case 5:
-				Comprar_criptomoedas ();
-				break;
-			case 6:
-				Vender_criptomoedas ();
-				break;
-			case 7:
-				Atualizar_cotacao ();
-				break;
-			case 8:
-				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
-				printf("DESCONECTANDO...");
-				return 0;
-		}
 };
-void Efetuar_login (){
-	Cotacao_inicial();
-};
+//MOSTRAR SALDO 
 void mostrarSaldo(int indice) {
     printf("-----------Saldo----------\n");
     printf("| REAIS: %.2f\n", carteira[indice]);
@@ -224,22 +153,82 @@ void mostrarSaldo(int indice) {
     printf("\n<--- volte com 'ENTER'\n");
     getchar(); 
     return 0;	
+};
+
+// DEPOSITAR REAIS
+void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const char*cpf, const int*indice) {
+    FILE extratofile;
+    float valor;
+    char dataAtual[20];
+    time_t t = time(NULL);
+    struct tm tm =localtime(&t);
+
+    printf("Quanto deseja depositar (ou 0 para não depositar): ");
+    scanf("%f", &valor);
+
+
+    carteira[indice] += valor;
+    snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
+             tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
+
+
+    extratofile = fopen("extrato.bin", "ab");
+    fprintf(extratofile,"%s %s + %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", cpf, dataAtual, valor, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
+
+    fclose(extratofile);
 }
-void Consultar_extrato (){
-    printf("2\n");
-};
-void Depositar_reais (){
-	printf("3\n");
-};
-void Sacar_reais (){
-	printf("4\n");
-};
+
+// Sacar Reais
+void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *cpf, const int *indice, const char *senha) {
+    FILE *extratofile;
+    float valor;
+    char dataAtual[20];
+    time_t t = time(NULL);
+    struct tm tm =localtime(&t);
+    char sen[6];
+    while(1){
+        
+        printf("Quanto deseja sacar (ou 0 para não depositar): ");
+        scanf("%f", &valor);
+
+        
+        if (valor > carteira[indice]) {
+            printf("ERRO: Você não pode sacar dinheiro a mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
+                  carteira[indice]);
+        }
+        else{
+            while (strcmp(senha,sen)!=0) {
+                printf("Digite sua senha para a validação do saque:\n ");
+                scanf("%s", &sen);
+                if (strcmp(senha,sen)!=0){
+                    printf("Senha incorreta, tente novamente.\n");
+                }
+            }
+            break;
+        }
+    }
+    carteira[indice] -= valor;
+    snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
+             tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
+
+
+    extratofile = fopen("extrato.bin", "ab");
+    fprintf(extratofile,"%s %s - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", cpf, dataAtual, valor, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
+
+    fclose(extratofile);
+    
+    printf("\n<--- volte com 'ENTER'\n");
+    getchar(); 
+    return 0;
+}
 void Comprar_criptomoedas (){
 	
 };
 void Vender_criptomoedas (){
 	printf("6\n");
 };
+
+//FUNÇÕES PARA ATUALIZAR COTAÇÃO
 void Cotacao_inicial (){
 	srand(time(NULL));
 	int i;
@@ -321,5 +310,64 @@ void Atualiza_cotacao(int indice){
 	printf("\n<--- volte com 'ENTER'\n");
     	getchar(); 
     	return 0
+};
+
+//MOSTAR O MENU
+void menu(){
+
+	int cont;
+
+	while(1){
+		printf("Bem vindo ao menu!\n");
+		printf("O que você deseja acessar?\n");
+		printf("--------------------------\n");
+		printf("1-Consultar saldo\n");
+		printf("2-Consultar extrato\n");
+		printf("3-Depositar reais\n");
+		printf("4-Sacar reais\n");
+		printf("5-Comprar criptomoedas:\n");
+		printf("6-Vender criptomoedas\n");
+		printf("7-Atualizar cotação\n");
+		printf("8-Sair\n");
+		scanf("%d", &cont);
+		break;
+	}
+	    switch (cont){
+			case 1:
+				mostrarSaldo();
+				break;
+			case 2:
+				extrato();
+				break;
+			case 3:
+				depositar();
+				break;
+			case 4:
+				sacar();
+				break;
+			case 5:
+				Comprar_criptomoedas ();
+				break;
+			case 6:
+				Vender_criptomoedas ();
+				break;
+			case 7:
+				Atualizar_cotacao ();
+				break;
+			case 8:
+				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
+				printf("DESCONECTANDO...");
+				return 0;
+		}
+};
+
+int main()
+{
+	setlocale(LC_ALL, "portuguese");
+
+	menu();
+	
+	system("pause");
+	return 0;
 };
 
