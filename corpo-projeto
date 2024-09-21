@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+float bit = 342.089;
+float rip =  3.18;
+float eth = 12.980;
 
 float bit = 342.08;
 float rip =  3.18;
