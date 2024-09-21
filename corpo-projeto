@@ -30,7 +30,7 @@ void Vender_criptomoedas ();
 void Atualizar_cotacao ();
 void Cotacao_inicial ();
 
-//CARREGAMENTO DOS ARQUIVOS
+//CARREGAMENTO DOS ARQUIVOS.
 void iniciacao_arquivos() {
   char linha[100];
   FILE *cpfss;
@@ -80,7 +80,8 @@ void iniciacao_arquivos() {
 
 };
 
-//LOGIN
+//LOGIN.
+
 void login(){
   while (1){
     printf("BEM VINDO!!\n");
@@ -106,7 +107,36 @@ void login(){
   }
 }
 
-//CONSULTAR O EXTRATO
+//CONSULTAR O EXTRATO.
+
+void extrato() {
+    FILE *extratobanco;
+    
+    char linha[1000]; 
+
+    extratobanco = fopen("extrato.bin", "rb");
+    if (extratobanco == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    while (fgets(linha, sizeof(linha), extratobanco) != NULL) {
+
+        char *espaco = strchr(linha, ' '); 
+        if (espaco != NULL) {
+            *espaco = '\0'; 
+
+            if (strcmp(linha, cpf) == 0) {
+                printf("%s\n", espaco + 1); 
+            }
+        }
+    }
+
+    fclose(extratobanco);
+    printf("\n<--- volte com 'ENTER'\n");
+    getchar(); 
+    return 0;
+}
 
 
 int main()
