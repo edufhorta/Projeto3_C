@@ -32,31 +32,24 @@ void Cotacao_inicial ();
 
 //CARREGAMENTO DOS ARQUIVOS.
 void iniciacao_arquivos() {
-  char linha[100];
-  FILE *cpfss;
-  cpfss = fopen("cpfs.bin", "rb");
-
-  for(i=0;i<NUM_OF_USERS && fgets(linha,sizeof(linha), cpfss);i++) {
-    linha[ strcspn(linha, "\n")]='\0';
-      strcpy(cpf_lista[i], linha);
-
-    };
-  fclose(cpfss);
+   FILE *cpfss = fopen("cpfs.bin", "r"); // Open the binary file in read mode
 
 
+    for (i = 0; i < NUM_OF_USERS && fgets(cpf_lista[i], 13, cpfss) != NULL; i++) {
+       
+        cpf_lista[i][strcspn(cpf_lista[i], "\n")] = 0;
+    }
+
+    fclose(cpfss); 
+  FILE *senhass = fopen("senhas.bin", "r"); // Open the binary file in read mode
 
 
-  FILE *senhass;
-  senhass = fopen("senhas.bin", "rb");
+    for (i = 0; i < NUM_OF_USERS && fgets(senha_lista[i], 13, senhass) != NULL; i++) {
+       
+        senha_lista[i][strcspn(senha_lista[i], "\n")] = 0;
+    }
 
-  for (i=0;i<NUM_OF_USERS && fgets(linha,sizeof(linha), senhass);i++) {
-    linha[strcspn(linha, "\n")]='\0';
-
-      strcpy(senha_lista[i], linha);
-
-    };
-
-  fclose(senhass);
+    fclose(senhass); 
 
 //iniciação dos saldos agora
      FILE *carteirafile;
@@ -82,7 +75,7 @@ void iniciacao_arquivos() {
 
 //LOGIN.
 
-void login(){
+void login(int *indice){
   while (1){
     printf("BEM VINDO!!\n");
     printf("Digite seu CPF: ");
@@ -94,7 +87,7 @@ void login(){
       if (strcmp(cpf_lista[i], cpf)== 0) {
         if (strcmp(senha_lista[i],senha)==0){
           printf("Login realizado com sucesso!\n");
-            int indice = i;
+          *indice = i;
           return;
         }
 
