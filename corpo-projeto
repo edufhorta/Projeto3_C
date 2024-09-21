@@ -185,6 +185,7 @@ void menu(){
 		printf("5-Comprar criptomoedas:\n");
 		printf("6-Vender criptomoedas\n");
 		printf("7-Atualizar cotação\n");
+		printf("8-Sair\n");
 		scanf("%d", &cont);
 		break;
 	}
@@ -210,6 +211,10 @@ void menu(){
 			case 7:
 				Atualizar_cotacao ();
 				break;
+			case 8:
+				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
+				printf("DESCONECTANDO...");
+				return 0;
 		}
 };
 void Efetuar_login (){
