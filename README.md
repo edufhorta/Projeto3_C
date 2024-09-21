@@ -19,4 +19,4 @@ O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários 
 - Atualizar cotação das criptomoedas aleatoriamente.
 
 ## Forma de execução 
-- Coloque todos os arquivos em uma pasta e execute o corpo-projeto e certifique-se de ter o GCC instalado no seu sistema.
+- Coloque todos os arquivos em uma pasta e execute o "corpo-projeto" e certifique-se de ter o "GCC" instalado no seu sistema.
