@@ -51,14 +51,14 @@ void iniciacao_arquivos() {
      size_t lendo = fread(carteira, sizeof(float),10,carteirafile);
      fclose(carteirafile);
 
-    carteirabitfile = fopen("saldo.bin","rb");
-     size_t lendobit = fread(carteira, sizeof(float),10,carteirabitfile);
+    carteirabitfile = fopen("saldobit.bin","rb");
+     size_t lendobit = fread(carteiraBit, sizeof(float),10,carteirabitfile);
      fclose(carteirabitfile);
-    carteiraethfile = fopen("saldo.bin","rb");
-     size_t lendoeth = fread(carteira, sizeof(float),10,carteiraethfile);
+    carteiraethfile = fopen("saldoeth.bin","rb");
+     size_t lendoeth = fread(carteiraEth, sizeof(float),10,carteiraethfile);
      fclose(carteiraethfile);
-    carteiraxrpfile = fopen("saldo.bin","rb");
-     size_t lendoxrp = fread(carteira, sizeof(float),10,carteiraxrpfile);
+    carteiraxrpfile = fopen("saldoxrp.bin","rb");
+     size_t lendoxrp = fread(carteiraXrp, sizeof(float),10,carteiraxrpfile);
      fclose(carteiraxrpfile);
 
 };
