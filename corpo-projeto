@@ -30,6 +30,55 @@ void Vender_criptomoedas ();
 void Atualizar_cotacao ();
 void Cotacao_inicial ();
 
+void iniciacao_arquivos() {
+  char linha[100];
+  FILE *cpfss;
+  cpfss = fopen("cpfs.bin", "rb");
+
+  for(i=0;i<NUM_OF_USERS && fgets(linha,sizeof(linha), cpfss);i++) {
+    linha[ strcspn(linha, "\n")]='\0';
+      strcpy(cpf_lista[i], linha);
+
+    };
+  fclose(cpfss);
+
+
+
+
+  FILE *senhass;
+  senhass = fopen("senhas.bin", "rb");
+
+  for (i=0;i<NUM_OF_USERS && fgets(linha,sizeof(linha), senhass);i++) {
+    linha[strcspn(linha, "\n")]='\0';
+
+      strcpy(senha_lista[i], linha);
+
+    };
+
+  fclose(senhass);
+
+//iniciação dos saldos agora
+     FILE *carteirafile;
+     FILE *carteirabitfile;
+     FILE *carteiraethfile;
+     FILE *carteiraxrpfile;
+     
+     carteirafile = fopen("saldo.bin","rb");
+     size_t lendo = fread(carteira, sizeof(float),10,carteirafile);
+     fclose(carteirafile);
+
+    carteirabitfile = fopen("saldobit.bin","rb");
+     size_t lendobit = fread(carteiraBit, sizeof(float),10,carteirabitfile);
+     fclose(carteirabitfile);
+    carteiraethfile = fopen("saldoeth.bin","rb");
+     size_t lendoeth = fread(carteiraEth, sizeof(float),10,carteiraethfile);
+     fclose(carteiraethfile);
+    carteiraxrpfile = fopen("saldoxrp.bin","rb");
+     size_t lendoxrp = fread(carteiraXrp, sizeof(float),10,carteiraxrpfile);
+     fclose(carteiraxrpfile);
+
+};
+
 int main()
 {
 	setlocale(LC_ALL, "portuguese");
