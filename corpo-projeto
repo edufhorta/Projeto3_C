@@ -11,7 +11,7 @@ float eth = 12.98;
 
 void menu ();
 void Efetuar_login ();
-void Consultar_reais  ();
+void mostrarSaldo  ();
 void Consultar_extrato  ();
 void Depositar_reais ();
 void Sacar_reais ();
@@ -37,7 +37,7 @@ void menu(){
 		printf("Bem vindo ao menu!\n");
 		printf("O que você deseja acessar?\n");
 		printf("--------------------------\n");
-		printf("1-Consultar saldo de reais\n");
+		printf("1-Consultar saldo\n");
 		printf("2-Consultar extrato\n");
 		printf("3-Depositar reais\n");
 		printf("4-Sacar reais\n");
@@ -49,7 +49,7 @@ void menu(){
 	}
 	    switch (cont){
 			case 1:
-				Consultar_reais ();
+				mostrarSaldo ();
 				break;
 			case 2:
 				Consultar_extrato ();
@@ -74,9 +74,18 @@ void menu(){
 void Efetuar_login (){
 	Cotacao_inicial();
 };
-void Consultar_reais (){
-    printf("1\n");
-};
+void mostrarSaldo(int indice) {
+    printf("-----------Saldo----------\n");
+    printf("| REAIS: %.2f\n", carteira[indice]);
+    printf("| BITCOIN: %.5f\n", carteiraBit[indice]);
+    printf("| ETHEREUM: %.5f\n", carteiraEth[indice]);
+    printf("| RIPPLE: %.5f\n", carteiraXrp[indice]);
+    printf("--------------------------\n");
+	
+    printf("\n<--- volte com 'ENTER'\n");
+    getchar(); 
+    return 0;	
+}
 void Consultar_extrato (){
     printf("2\n");
 };
