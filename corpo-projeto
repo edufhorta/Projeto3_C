@@ -30,6 +30,7 @@ void Vender_criptomoedas ();
 void Atualizar_cotacao ();
 void Cotacao_inicial ();
 
+//CARREGAMENTO DOS ARQUIVOS
 void iniciacao_arquivos() {
   char linha[100];
   FILE *cpfss;
@@ -78,6 +79,35 @@ void iniciacao_arquivos() {
      fclose(carteiraxrpfile);
 
 };
+
+//LOGIN
+void login(){
+  while (1){
+    printf("BEM VINDO!!\n");
+    printf("Digite seu CPF: ");
+    scanf("%11s", cpf);
+    printf("Digite sua senha: ");
+    scanf("%6s", senha);
+    
+    for (int i = 0; i < NUM_OF_USERS; i++) {
+      if (strcmp(cpf_lista[i], cpf)== 0) {
+        if (strcmp(senha_lista[i],senha)==0){
+          printf("Login realizado com sucesso!\n");
+            int indice = i;
+          return;
+        }
+
+    
+      
+      }
+    }
+    printf("CPF ou senha incorretos!\n");
+    
+  }
+}
+
+//CONSULTAR O EXTRATO
+
 
 int main()
 {
