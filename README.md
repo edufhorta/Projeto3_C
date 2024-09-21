@@ -1,8 +1,8 @@
-## Projeto 1 - Exchange de Criptomoedas
+# Projeto 1 - Exchange de Criptomoedas
 
-# Bruno Rossi de Lima - RA:24.124.36-5
-# Eduardo Finamore Horta - RA: 24.124.004-3 
-# Victor Ferraretto Novais - RA: 24.124.070-4
+## Bruno Rossi de Lima - RA:24.124.36-5
+## Eduardo Finamore Horta - RA: 24.124.004-3 
+## Victor Ferraretto Novais - RA: 24.124.070-4
 
 
 ## Objetivo do Projeto
