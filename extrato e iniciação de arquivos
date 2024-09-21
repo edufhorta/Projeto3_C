@@ -7,10 +7,14 @@ char cpf[12];
 char senha[6];
 char cpf_lista[NUM_OF_USERS][12];
 char senha_lista[NUM_OF_USERS][7];
+float carteira[NUM_OF_USERS]={};
+float carteiraBit[NUM_OF_USERS]={};
+float carteiraEth[NUM_OF_USERS]={};
+float carteiraXrp[NUM_OF_USERS]={};
 int indice;
 int i = 0;
 // apenas senha e cpf
-void inciacao_arquivos() {
+void iniciacao_arquivos() {
   char linha[100];
   FILE *cpfss;
   cpfss = fopen("cpfs.bin", "rb");
@@ -36,6 +40,26 @@ void inciacao_arquivos() {
     };
 
   fclose(senhass);
+
+//os saldos agora
+     FILE *carteirafile;
+     FILE *carteirabitfile;
+     FILE *carteiraethfile;
+     FILE *carteiraxrpfile;
+     
+     carteirafile = fopen("saldo.bin","rb");
+     size_t lendo = fread(carteira, sizeof(float),10,carteirafile);
+     fclose(carteirafile);
+
+    carteirabitfile = fopen("saldo.bin","rb");
+     size_t lendobit = fread(carteira, sizeof(float),10,carteirabitfile);
+     fclose(carteirabitfile);
+    carteiraethfile = fopen("saldo.bin","rb");
+     size_t lendoeth = fread(carteira, sizeof(float),10,carteiraethfile);
+     fclose(carteiraethfile);
+    carteiraxrpfile = fopen("saldo.bin","rb");
+     size_t lendoxrp = fread(carteira, sizeof(float),10,carteiraxrpfile);
+     fclose(carteiraxrpfile);
 
 };
 void login(){
