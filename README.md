@@ -20,3 +20,17 @@ O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários 
 
 ## Forma de execução 
 - Coloque todos os arquivos em uma pasta e execute o "corpo-projeto" e certifique-se de ter o "GCC" instalado no seu sistema.
+- Para entrar no programa digite um desses 10 logins (CPFS + senhas):
+1. CPF: 75764675332 // senha: 123456;
+2. CPF: 56394345628 // senha: 654321;
+3. CPF: 82347782002 // senha: 135792;
+4. CPF: 51382457324 // senha: 246813;
+5. CPF: 69186635859 // senha: 102938;
+6. CPF: 37532705471 // senha: 564738;
+7. CPF: 69477299553 // senha: 987654;
+8. CPF: 20567586600 // senha: 321654;
+9. CPF: 99462980233 // senha: 456789;
+10. CPF: 14445337200 // senha: 112233.
+
+
+
