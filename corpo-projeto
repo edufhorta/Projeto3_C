@@ -244,7 +244,7 @@ void Sacar_reais (){
 void Comprar_criptomoedas (){
 	
 };
-void Vender_criptomoedas (int indice){
+void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice){
 	int opcao;
     float valor, quantidade, taxa, total;
     char confirma;
@@ -270,7 +270,7 @@ void Vender_criptomoedas (int indice){
                     return;
                 }
                 valor = quantidade * bit;
-                taxa = (3/100) * valor;
+                taxa = (3.00/100.00) * valor;
                 total = valor - taxa;
                 while (1)
                 {
@@ -304,7 +304,7 @@ void Vender_criptomoedas (int indice){
                         break;
                     };
                     else if(confirma == 'n'){
-                        printf("Transação concelada!")
+                        printf("Transação concelada!\n");
                         break;
                     };
                     else
@@ -325,7 +325,7 @@ void Vender_criptomoedas (int indice){
                     return;
                 }
                 valor = quantidade * eth;
-                taxa = (2/100) * valor;
+                taxa = (2.00/100.00) * valor;
                 total = valor - taxa;
                 while (1)
                 {
@@ -358,7 +358,7 @@ void Vender_criptomoedas (int indice){
                         break;
                     };
                     else if(confirma == 'n'){
-                        printf("Transação concelada!")
+                        printf("Transação concelada!\n");
                         break;
                     };
                     else
@@ -378,7 +378,7 @@ void Vender_criptomoedas (int indice){
                     return;
                 }
                 valor = quantidade * rip;
-                taxa = (1/100) * valor;
+                taxa = (1.00/100.00) * valor;
                 total = valor - taxa;
                 while (1)
                 {
@@ -411,7 +411,7 @@ void Vender_criptomoedas (int indice){
                         break;
                     };
                     else if(confirma == 'n'){
-                        printf("Transação concelada!")
+                        printf("Transação concelada!\n");
                         break;
                     };
                     else
