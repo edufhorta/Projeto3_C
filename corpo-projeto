@@ -221,6 +221,8 @@ void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carte
     getchar(); 
     return 0;
 }
+
+// COMPRAR CRIPTOMOEDAS
 void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice, const char *senha){
 	int opcao;
 	    float valor, quantidade, taxa, total;
@@ -441,6 +443,8 @@ void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraE
 	printf("\n<--- volte com 'ENTER'\n");
     	getchar(); 
 };
+
+// VENDER CRIPTOMOEDAS
 void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice){
 	int opcao;
     float valor, quantidade, taxa, total;
