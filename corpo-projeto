@@ -156,7 +156,7 @@ void mostrarSaldo(int indice) {
 };
 
 // DEPOSITAR REAIS
-void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const char*cpf, const int*indice) {
+void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const int*indice) {
     FILE extratofile;
     float valor;
     char dataAtual[20];
@@ -179,7 +179,7 @@ void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carte
 }
 
 // Sacar Reais
-void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *cpf, const int *indice, const char *senha) {
+void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice, const char *senha) {
     FILE *extratofile;
     float valor;
     char dataAtual[20];
@@ -709,11 +709,11 @@ void Atualiza_cotacao(int indice){
 	printf("Bitcoin: %.2f\n", bit);
 	printf("Ethereum: %.2f\n", eth);
 	printf("Ripple: %.2f\n", rip);
-	printf("\n")
+	printf("\n");
 	printf("Cotação atualizada\n");
 	printf("\n<--- volte com 'ENTER'\n");
     	getchar(); 
-    	return 0
+    	return 0;
 };
 
 //MOSTAR O MENU
@@ -735,19 +735,19 @@ void menu(){
 		printf("8-Sair\n");
 		scanf("%d", &cont);
 		break;
-	}
+	
 	    switch (cont){
 			case 1:
-				mostrarSaldo();
+				mostrarSaldo(indice);
 				break;
 			case 2:
 				extrato();
 				break;
 			case 3:
-				depositar();
+				depositar(carteira, carteiraBit, carteiraEth, carteiraXrp, indice);
 				break;
 			case 4:
-				sacar();
+				sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, indice, senha);
 				break;
 			case 5:
 				Comprar_criptomoedas ();
@@ -756,19 +756,20 @@ void menu(){
 				Vender_criptomoedas ();
 				break;
 			case 7:
-				Atualizar_cotacao ();
+				Atualizar_cotacao (indice);
 				break;
 			case 8:
 				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
 				printf("DESCONECTANDO...");
 				return 0;
 		}
+	}
 };
 
 int main()
 {
 	setlocale(LC_ALL, "portuguese");
-
+	
 	menu();
 	
 	system("pause");
