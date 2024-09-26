@@ -271,15 +271,6 @@ void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraE
                         carteira[indice] -= total;
                         carteiraBit[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteirabit.bin", "r+");
 
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
                         tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
@@ -338,16 +329,6 @@ void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraE
                         carteira[indice] -= total;
                         carteiraEth[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteiraeth.bin", "r+");
-
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
                         tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
 
@@ -404,15 +385,6 @@ void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraE
                         carteira[indice] -= total;
                         carteiraEth[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteiraeth.bin", "r+");
 
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
                         tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
@@ -482,15 +454,6 @@ void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEt
                         carteira[indice] += total;
                         carteiraBit[indice] -= quantidade;
                         printf("Venda realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteirabit.bin", "r+");
 
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
                         tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
@@ -537,15 +500,6 @@ void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEt
                         carteira[indice] += total;
                         carteiraEth[indice] -= quantidade;
                         printf("Venda realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteiraeth.bin", "r+");
 
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
 
@@ -590,15 +544,6 @@ void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEt
                         carteira[indice] += total;
                         carteiraXrp[indice] -= quantidade;
                         printf("Venda realizada com sucesso!\n");
-                        file = fopen("carteirareal.bin", "r+");
-                        if (file == NULL) {
-                            perror("Erro ao abrir carteirareal.bin");
-                            exit(EXIT_FAILURE);
-                        }
-                        fseek(file, indice * sizeof(float), SEEK_SET);
-                        fprintf(file, "%.2f\n", carteira[indice]);
-                        fclose(file);
-                        file = fopen("carteiraxrp.bin", "r+");
 
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
 
@@ -750,10 +695,10 @@ void menu(){
 				sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, indice, senha);
 				break;
 			case 5:
-				Comprar_criptomoedas ();
+				Comprar_criptomoedas (carteira, carteiraBit, carteiraEth, carteiraXrp, indice, senha);
 				break;
 			case 6:
-				Vender_criptomoedas ();
+				Vender_criptomoedas (carteira, carteiraBit,carteiraEth,carteiraXrp,indice);
 				break;
 			case 7:
 				Atualizar_cotacao (indice);
