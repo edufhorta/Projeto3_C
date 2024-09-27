@@ -4,13 +4,13 @@
 #include <time.h>
 #include <locale.h>
 #define NUM_OF_USERS 10
-float bit = 342.089;
+float bit = 342089;
 float rip =  3.18;
-float eth = 12.980;
+float eth = 12980;
 char cpf[12];
-char senha[6];
-char cpf_lista[NUM_OF_USERS][12];
-char senha_lista[NUM_OF_USERS][7];
+char senha[7];
+char cpf_lista[NUM_OF_USERS][12]={"75764675332","56394345628","82347782002","51382457324","69186635859","37532705471","69477299553","20567586600","99462980233","14445337200"};
+char senha_lista[NUM_OF_USERS][7]={"123456","654321","135792","246813","102938","564738","987654","321654","456789","112233"};
 float carteira[NUM_OF_USERS]={};
 float carteiraBit[NUM_OF_USERS]={};
 float carteiraEth[NUM_OF_USERS]={};
@@ -20,31 +20,11 @@ int i = 0;
 
 //CARREGAMENTO DOS ARQUIVOS.
 void iniciacao_arquivos() {
-   FILE *cpfss = fopen("cpfs.bin", "r"); // Open the binary file in read mode
-
-
-    for (i = 0; i < NUM_OF_USERS && fgets(cpf_lista[i], 13, cpfss) != NULL; i++) {
-       
-        cpf_lista[i][strcspn(cpf_lista[i], "\n")] = 0;
-    }
-
-    fclose(cpfss); 
-  FILE *senhass = fopen("senhas.bin", "r"); // Open the binary file in read mode
-
-
-    for (i = 0; i < NUM_OF_USERS && fgets(senha_lista[i], 13, senhass) != NULL; i++) {
-       
-        senha_lista[i][strcspn(senha_lista[i], "\n")] = 0;
-    }
-
-    fclose(senhass); 
-
-//iniciação dos saldos agora
      FILE *carteirafile;
      FILE *carteirabitfile;
      FILE *carteiraethfile;
      FILE *carteiraxrpfile;
-     
+
      carteirafile = fopen("saldo.bin","rb");
      size_t lendo = fread(carteira, sizeof(float),10,carteirafile);
      fclose(carteirafile);
@@ -70,7 +50,7 @@ void login(int *indice){
     scanf("%11s", cpf);
     printf("Digite sua senha: ");
     scanf("%6s", senha);
-    
+
     for (int i = 0; i < NUM_OF_USERS; i++) {
       if (strcmp(cpf_lista[i], cpf)== 0) {
         if (strcmp(senha_lista[i],senha)==0){
@@ -79,12 +59,12 @@ void login(int *indice){
           return;
         }
 
-    
-      
+
+
       }
     }
     printf("CPF ou senha incorretos!\n");
-    
+
   }
 }
 
@@ -92,14 +72,10 @@ void login(int *indice){
 
 void extrato() {
     FILE *extratobanco;
-    
+
     char linha[1000]; 
 
     extratobanco = fopen("extrato.bin", "rb");
-    if (extratobanco == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
-    }
 
     while (fgets(linha, sizeof(linha), extratobanco) != NULL) {
 
@@ -116,7 +92,7 @@ void extrato() {
     fclose(extratobanco);
     printf("\n<--- volte com 'ENTER'\n");
     getchar(); 
-    return 0;
+    return;
 }
 
 //ATUALIZAÇÂO DAS CARTEIRAS (COLOCAR POR ULTIMO)
@@ -125,7 +101,7 @@ void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteir
      FILE *carteirabitfile;
      FILE *carteiraethfile;
      FILE *carteiraxrpfile;
-     
+
      carteirafile = fopen("saldo.bin","wb");
      size_t escrevendo = fwrite(carteira, sizeof(float),10,carteirafile);
      fclose(carteirafile);
@@ -142,26 +118,26 @@ void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteir
 
 };
 //MOSTRAR SALDO 
-void mostrarSaldo(int indice) {
+void mostrarSaldo() {
     printf("-----------Saldo----------\n");
     printf("| REAIS: %.2f\n", carteira[indice]);
     printf("| BITCOIN: %.5f\n", carteiraBit[indice]);
     printf("| ETHEREUM: %.5f\n", carteiraEth[indice]);
     printf("| RIPPLE: %.5f\n", carteiraXrp[indice]);
     printf("--------------------------\n");
-	
-    printf("\n<--- volte com 'ENTER'\n");
-    getchar(); 
-    return 0;	
+
+    printf("\n<--- volte com 'ENTER'\n"); 
+    getchar();
+    return;	
 };
 
 // DEPOSITAR REAIS
-void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const int*indice) {
-    FILE extratofile;
+void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const char *cpf) {
+    FILE *extratofile;
     float valor;
     char dataAtual[20];
     time_t t = time(NULL);
-    struct tm tm =localtime(&t);
+    struct tm tm=*localtime(&t);
 
     printf("Quanto deseja depositar (ou 0 para não depositar): ");
     scanf("%f", &valor);
@@ -179,19 +155,19 @@ void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carte
 }
 
 // Sacar Reais
-void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice, const char *senha) {
+void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *senha) {
     FILE *extratofile;
     float valor;
     char dataAtual[20];
     time_t t = time(NULL);
-    struct tm tm =localtime(&t);
+    struct tm tm=*localtime(&t);
     char sen[6];
     while(1){
-        
+
         printf("Quanto deseja sacar (ou 0 para não depositar): ");
         scanf("%f", &valor);
 
-        
+
         if (valor > carteira[indice]) {
             printf("ERRO: Você não pode sacar dinheiro a mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
                   carteira[indice]);
@@ -216,508 +192,294 @@ void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carte
     fprintf(extratofile,"%s %s - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", cpf, dataAtual, valor, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
 
     fclose(extratofile);
-    
-    printf("\n<--- volte com 'ENTER'\n");
-    getchar(); 
-    return 0;
+
+    return;
 }
 
 // COMPRAR CRIPTOMOEDAS
-void Comprar_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice, const char *senha){
-	int opcao;
-	    float valor, quantidade, taxa, total;
-	    FILE *file;
-	    char dataAtual[20], sen[7], confirma[1];
-	    time_t t = time(NULL);
-	    struct tm tm;
-	    tm = *localtime(&t);
-	
-	    printf("Comprar Cripto:\n");
-	    printf("1 - Bitcoin\n");
-	    printf("2 - Ethereum\n");
-	    printf("3 - Ripple\n");
-	    scanf("%d", &opcao);
+    
 
-	case 1: // Bitcoin
-            printf("Quanto de Bitcoin gostaria de comprar?(Taxa de compra = 2%) R$ ");
-            scanf("%f", &valor);
-            while (1){
-                if (valor > carteira[indice]) {
-                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
-                        carteira[indice]);
-                };
-                else
-                {
-                    while (strcmp(senha,sen)!=0) {
-                        printf("Digite sua senha para a validação da compra:\n ");
-                        scanf("%s", &sen);
-                        if (strcmp(senha,sen)!=0){
-                            printf("Senha incorreta, tente novamente.\n");
-                        };
-                    };
-                    break;
-                };
-            };
-            quantidade = valor / bit;
-            taxa = (2.00/100.00)*valor;
-            total = valor + taxa;
-            
-            while (1)
-                {
-                    printf("Compra de %f Bitcoin: %.2f + %.2f (Taxa de Compra) = %.2f ", quantidade, valor, taxa, total);
+void Comprar_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *senha,const char *cpf) {
+        int opcao;
+        float valor, quantidade, taxa, total;
+        FILE *file;
+        char dataAtual[20], sen[7]; // Buffer para a senha
+        char confirma;
+        time_t t = time(NULL);
+        struct tm tm = *localtime(&t);
+
+        printf("Comprar Cripto:\n");
+        printf("1 - Bitcoin\n");
+        printf("2 - Ethereum\n");
+        printf("3 - Ripple\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1: // Bitcoin
+                printf("Quanto de Bitcoin gostaria de comprar? (Taxa de compra = 2%%) R$ ");
+                scanf("%f", &valor);
+                while (valor > carteira[indice]) {
+                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n", carteira[indice]);
+                    printf("Quanto de Bitcoin gostaria de comprar? (Taxa de compra = 2%%) R$ ");
+                    scanf("%f", &valor);
+                }
+                // Solicitar a senha
+                while (1) {
+                    printf("Digite sua senha para a validação da compra: ");
+                    scanf("%s", sen);
+                    if (strcmp(senha, sen) == 0) {
+                        break;
+                    } else {
+                        printf("Senha incorreta, tente novamente.\n");
+                    }
+                }
+                taxa = (2.00 / 100.00) * valor;
+                total = valor - taxa;
+                quantidade = total / bit;
+               
+
+                while (1) {
+                    printf("Compra de %.6f Bitcoin: %.2f - %.2f (Taxa de Compra) = %.2f\n", quantidade, valor, taxa, total);
                     printf("Confirmação de transação -  (s/n): ");
+                    getchar(); // Limpa o buffer
                     scanf("%c", &confirma);
-                    if (confirma == 's'){
+                    if (confirma == 's') {
                         carteira[indice] -= total;
                         carteiraBit[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-
-                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
-                        tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
-
+                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
                         file = fopen("extrato.bin", "a");
                         if (file == NULL) {
                             perror("Erro ao abrir extrato.bin");
                             exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s COMPRA - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
+                        }
+                        fprintf(file, "%s %s COMPRA - %.2f REAIS CT:%.2f   TX:0.02 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n",cpf, dataAtual, valor,bit, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
                         fclose(file);
                         break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
+                    } else if (confirma == 'n') {
+                        printf("Transação cancelada!\n");
                         break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                };
+                    } else {
+                        printf("ERRO: Escolha uma opção disponível!\n");
+                    }
+                }
+                break;
 
-            break;
+            case 2: // Ethereum
+                printf("Quanto de Ethereum gostaria de comprar? (Taxa de compra = 1%%) R$ ");
+                scanf("%f", &valor);
+                while (valor > carteira[indice]) {
+                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n", carteira[indice]);
+                    printf("Quanto de Ethereum gostaria de comprar? (Taxa de compra = 1%%) R$ ");
+                    scanf("%f", &valor);
+                }
+                // Solicitar a senha
+                while (1) {
+                    printf("Digite sua senha para a validação da compra: ");
+                    scanf("%s", sen);
+                    if (strcmp(senha, sen) == 0) {
+                        break;
+                    } else {
+                        printf("Senha incorreta, tente novamente.\n");
+                    }
+                }
+                taxa = (1.00 / 100.00) * valor;
+                total = valor - taxa;
+                quantidade = total / eth;
+                
 
-        case 2: // Ethereum
-            printf("Quanto de Ethereum gostaria de comprar?(Taxa de compra = 1%) R$ ");
-            scanf("%f", &valor);
-            while (1){
-                if (valor > carteira[indice]) {
-                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
-                        carteira[indice]);
-                };
-                else
-                {
-                    while (strcmp(senha,sen)!=0) {
-                        printf("Digite sua senha para a validação da compra:\n ");
-                        scanf("%s", &sen);
-                        if (strcmp(senha,sen)!=0){
-                            printf("Senha incorreta, tente novamente.\n");
-                        };
-                    };
-                    break;
-                };
-            };
-            quantidade = valor / eth;
-            taxa = (1.00/100.00)*valor;
-            total = valor + taxa;
-            
-            while (1)
-                {
-                    printf("Compra de %f Ethereum: %.2f + %.2f (Taxa de Compra) = %.2f ", quantidade, valor, taxa, total);
+                while (1) {
+                    printf("Compra de %.6f Ethereum: %.2f - %.2f (Taxa de Compra) = %.2f\n", quantidade, valor, taxa, total);
                     printf("Confirmação de transação -  (s/n): ");
+                    getchar(); // Limpa o buffer
                     scanf("%c", &confirma);
-                    if (confirma == 's'){
+                    if (confirma == 's') {
                         carteira[indice] -= total;
                         carteiraEth[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
-                        tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
-
+                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
                         file = fopen("extrato.bin", "a");
                         if (file == NULL) {
                             perror("Erro ao abrir extrato.bin");
                             exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s COMPRA - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
+                        }
+                        fprintf(file, "%s %s COMPRA - %.2f REAIS CT:%.2f    TX:0.01 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", cpf, dataAtual, valor,eth, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
                         fclose(file);
                         break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
+                    } else if (confirma == 'n') {
+                        printf("Transação cancelada!\n");
                         break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                };
-            break;
+                    } else {
+                        printf("ERRO: Escolha uma opção disponível!\n");
+                    }
+                }
+                break;
 
-        case 3: // Ripple
-            pprintf("Quanto de Ripple gostaria de comprar?(Taxa de compra = 1%) R$ ");
-            scanf("%f", &valor);
-            while (1){
-                if (valor > carteira[indice]) {
-                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
-                        carteira[indice]);
-                };
-                else
-                {
-                    while (strcmp(senha,sen)!=0) {
-                        printf("Digite sua senha para a validação da compra:\n ");
-                        scanf("%s", &sen);
-                        if (strcmp(senha,sen)!=0){
-                            printf("Senha incorreta, tente novamente.\n");
-                        };
-                    };
-                    break;
-                };
-            };
-            quantidade = valor / rip;
-            taxa = (1.00/100.00)*valor;
-            total = valor + taxa;
-            
-            while (1)
-                {
-                    printf("Compra de %f Ripple: %.2f + %.2f (Taxa de Compra) = %.2f ", quantidade, valor, taxa, total);
+            case 3: // Ripple
+                printf("Quanto de Ripple gostaria de comprar? (Taxa de compra = 1%%) R$ ");
+                scanf("%f", &valor);
+                while (valor > carteira[indice]) {
+                    printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n", carteira[indice]);
+                    printf("Quanto de Ripple gostaria de comprar? (Taxa de compra = 1%%) R$ ");
+                    scanf("%f", &valor);
+                }
+                // Solicitar a senha
+                while (1) {
+                    printf("Digite sua senha para a validação da compra: ");
+                    scanf("%s", sen);
+                    if (strcmp(senha, sen) == 0) {
+                        break;
+                    } else {
+                        printf("Senha incorreta, tente novamente.\n");
+                    }
+                }
+                taxa = (1.00 / 100.00) * valor;
+                total = valor - taxa;
+                quantidade = total / rip;
+
+
+                while (1) {
+                    printf("Compra de %.6f Ripple: %.2f - %.2f (Taxa de Compra) = %.2f\n", quantidade, valor, taxa, total);
                     printf("Confirmação de transação -  (s/n): ");
+                    getchar(); // Limpa o buffer
                     scanf("%c", &confirma);
-                    if (confirma == 's'){
+                    if (confirma == 's') {
                         carteira[indice] -= total;
-                        carteiraEth[indice] += quantidade;
+                        carteiraXrp[indice] += quantidade;
                         printf("Compra realizada com sucesso!\n");
-
-                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
-                        tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
-
-                        file = fopen("extrato.bin", "a");
-                        if (file == NULL) {
-                            perror("Erro ao abrir extrato.bin");
-                            exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s COMPRA - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
-                        fclose(file);
-                        break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
-                        break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                }
-            break;
-
-        default:
-            printf("Opçãoo inválida.\n");
-            return;
-	printf("\n<--- volte com 'ENTER'\n");
-    	getchar(); 
-};
-
-// VENDER CRIPTOMOEDAS
-void Vender_criptomoedas (float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const int *indice){
-	int opcao;
-    float valor, quantidade, taxa, total;
-    char confirma;
-    FILE *file;
-    char dataAtual[20];
-    time_t t = time(NULL);
-    struct tm tm;
-    tm = *localtime(&t);
-
-    printf("Vender Cripto:\n");
-    printf("1 - Bitcoin\n");
-    printf("2 - Ethereum\n");
-    printf("3 - Ripple\n");
-    scanf("%d", &opcao);
-
-    switch (opcao) {
-        case 1: // Bitcoin
-            printf("Quanto Bitcoins você gostaria de vender?(Taxa de venda = 3%): ");
-            scanf("%f", &quantidade);
-            {
-                if (quantidade > carteiraBit[indice]) {
-                    printf("ERRO: Você não pode vender mais Bitcoin do que o disponível em sua carteira!! (carteira: %.2f)\n", carteiraBit[indice]);
-                    return;
-                }
-                valor = quantidade * bit;
-                taxa = (3.00/100.00) * valor;
-                total = valor - taxa;
-                while (1)
-                {
-                    printf("Venda de %f Bitcoin: %.2f - %.2f (Taxa de venda) = %.2f ", quantidade, valor, taxa, total);
-                    printf("Confirmação de transação -  (s/n): ");
-                    scanf("%c", &confirma);
-                    if (confirma == 's'){
-                        carteira[indice] += total;
-                        carteiraBit[indice] -= quantidade;
-                        printf("Venda realizada com sucesso!\n");
-
-                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d",
-                        tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
-
-                        file = fopen("extrato.bin", "a");
-                        if (file == NULL) {
-                            perror("Erro ao abrir extrato.bin");
-                            exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s VENDA + %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
-                        fclose(file);
-                        break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
-                        break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                };
-                
-                
-            }break;
-
-        case 2: // Ethereum
-            printf("Quanto de Ethereum você gostaria de vender?(Taxa de venda = 2%): ");
-            scanf("%f", &quantidade);
-            {
-                if (quantidade > carteiraEth[indice]) {
-                    printf("ERRO: Você não pode vender mais Ethereum do que o disponível em sua carteira!! (carteira: %.2f)\n", carteiraEth[indice]);
-                    return;
-                }
-                valor = quantidade * eth;
-                taxa = (2.00/100.00) * valor;
-                total = valor - taxa;
-                while (1)
-                {
-                    printf("Venda de %f Ethereum %.2f - %.2f (Taxa de venda) = %.2f ", quantidade, valor, taxa, total);
-                    printf("Confirmação de transação -  (s/n): ");
-                    scanf("%c", &confirma);
-                    if (confirma == 's'){
-                        carteira[indice] += total;
-                        carteiraEth[indice] -= quantidade;
-                        printf("Venda realizada com sucesso!\n");
-
                         snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
-
                         file = fopen("extrato.bin", "a");
                         if (file == NULL) {
                             perror("Erro ao abrir extrato.bin");
                             exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s VENDA + %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
+                        }
+                        fprintf(file, "%s %s COMPRA - %.2f REAIS CT:%.2f   TX:0.01 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n",cpf, dataAtual, valor,rip, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
                         fclose(file);
                         break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
+                    } else if (confirma == 'n') {
+                        printf("Transação cancelada!\n");
                         break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                };
-                
-            }break;
-
-        case 3: // Ripple
-            printf("Quanto de Ripple você gostaria de vender?(Taxa de venda = 1%): ");
-            scanf("%f", &quantidade);
-            {
-                if (quantidade > carteiraXrp[indice]) {
-                    printf("ERRO: Você não pode vender mais Ripple do que o disponível em sua carteira!! (carteira: %.2f)\n", carteiraXrp[indice]);
-                    return;
+                    } else {
+                        printf("ERRO: Escolha uma opção disponível!\n");
+                    }
                 }
-                valor = quantidade * rip;
-                taxa = (1.00/100.00) * valor;
-                total = valor - taxa;
-                while (1)
-                {
-                    printf("Venda de %f Ripple %.2f - %.2f (Taxa de venda) = %.2f ", quantidade, valor, taxa, total);
-                    printf("Confirmação de transação -  (s/n): ");
-                    scanf("%c", &confirma);
-                    if (confirma == 's'){
-                        carteira[indice] += total;
-                        carteiraXrp[indice] -= quantidade;
-                        printf("Venda realizada com sucesso!\n");
+                break;
 
-                        snprintf(dataAtual, sizeof(dataAtual), "%02d-%02d-%04d %02d:%02d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min);
+            default:
+                printf("Opção inválida.\n");
+                return;
+        }
+    
+    }
 
-                        file = fopen("extrato.bin", "a");
-                        if (file == NULL) {
-                            perror("Erro ao abrir extrato.bin");
-                            exit(EXIT_FAILURE);
-                        };
-                        fprintf(file, "%s VENDA + %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", dataAtual, total, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
-                        fclose(file);
-                        break;
-                    };
-                    else if(confirma == 'n'){
-                        printf("Transação concelada!\n");
-                        break;
-                    };
-                    else
-                    {
-                        printf("ERRO: Escolha uma opção disponível!");
-                    };
-                };
-                
-            }break;
+void Atualiza_cotacao(){
+      srand(time(NULL));
 
-        default:
-            printf("Opção inválida.\n");
-            return;
-        
-    };
-    printf("\n<--- volte com 'ENTER'\n");
-    	getchar();
-};
+  int i;
 
-//FUNÇÕES PARA ATUALIZAR COTAÇÃO
-void Cotacao_inicial (){
-	srand(time(NULL));
-	int i;
-	for (i = 0; i < 3; i++) {
-	        int num = rand() % 100;
+  for (i = 0; i < 3; i++) {
+          int num = rand() % 100;
 
-		switch (i) {
-	            case 0:
-	                if (num % 2 == 0) {
-	                    bit = bit + ((5 / 100.0) * bit);
-	                } else {
-	                    bit = bit - ((5 / 100.0) * bit);
-	                }
-	                break;
-	
-	            case 1:
-	                if (num % 2 == 0) {
-	                    eth = eth + ((5 / 100.0) * eth);
-	                } else {
-	                    eth = eth - ((5 / 100.0) * eth);
-	                }
-	                break;
-	
-	            case 2:
-	                if (num % 2 == 0) {
-	                    rip = rip + ((5 / 100.0) * rip);
-	                } else {
-	                    rip = rip - ((5 / 100.0) * rip);
-	                }
-	                break;
-	
-	            default:
-	                break;
-	        }
-	}
-};
-void Atualiza_cotacao(int indice){
-    	srand(time(NULL));
+    switch (i) {
+              case 0:
+                  if (num % 2 == 0) {
+                      bit = bit + ((5 / 100.0) * bit);
+                  } else {
+                      bit = bit - ((5 / 100.0) * bit);
+                  }
+                  break;
 
-	int i;
-	
-	for (i = 0; i < 3; i++) {
-	        int num = rand() % 100;
+              case 1:
+                  if (num % 2 == 0) {
+                      eth = eth + ((5 / 100.0) * eth);
+                  } else {
+                      eth = eth - ((5 / 100.0) * eth);
+                  }
+                  break;
 
-		switch (i) {
-	            case 0:
-	                if (num % 2 == 0) {
-	                    bit = bit + ((5 / 100.0) * bit);
-	                } else {
-	                    bit = bit - ((5 / 100.0) * bit);
-	                }
-	                break;
-	
-	            case 1:
-	                if (num % 2 == 0) {
-	                    eth = eth + ((5 / 100.0) * eth);
-	                } else {
-	                    eth = eth - ((5 / 100.0) * eth);
-	                }
-	                break;
-	
-	            case 2:
-	                if (num % 2 == 0) {
-	                    rip = rip + ((5 / 100.0) * rip);
-	                } else {
-	                    rip = rip - ((5 / 100.0) * rip);
-	                }
-	                break;
-	
-	            default:
-	                break;
-	        }
-	}
-	printf("Bitcoin: %.2f\n", bit);
-	printf("Ethereum: %.2f\n", eth);
-	printf("Ripple: %.2f\n", rip);
-	printf("\n");
-	printf("Cotação atualizada\n");
-	printf("\n<--- volte com 'ENTER'\n");
-    	getchar(); 
-    	return 0;
+              case 2:
+                  if (num % 2 == 0) {
+                      rip = rip + ((5 / 100.0) * rip);
+                  } else {
+                      rip = rip - ((5 / 100.0) * rip);
+                  }
+                  break;
+
+              default:
+                  break;
+          }
+  }
+  printf("Bitcoin: %.2f\n", bit);
+  printf("Ethereum: %.2f\n", eth);
+  printf("Ripple: %.2f\n", rip);
+  printf("\n");
+  printf("Cotação atualizada\n");
+  printf("\n<--- volte com 'ENTER'\n");
+  getchar();
+  return;
 };
 
 //MOSTAR O MENU
-void menu(){
+void menu(const int *indice){
 
-	int cont;
+  int cont;
 
-	while(1){
-		printf("Bem vindo ao menu!\n");
-		printf("O que você deseja acessar?\n");
-		printf("--------------------------\n");
-		printf("1-Consultar saldo\n");
-		printf("2-Consultar extrato\n");
-		printf("3-Depositar reais\n");
-		printf("4-Sacar reais\n");
-		printf("5-Comprar criptomoedas:\n");
-		printf("6-Vender criptomoedas\n");
-		printf("7-Atualizar cotação\n");
-		printf("8-Sair\n");
-		scanf("%d", &cont);
-		break;
-	
-	    switch (cont){
-			case 1:
-				mostrarSaldo(indice);
-				break;
-			case 2:
-				extrato();
-				break;
-			case 3:
-				depositar(carteira, carteiraBit, carteiraEth, carteiraXrp, indice);
-				break;
-			case 4:
-				sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, indice, senha);
-				break;
-			case 5:
-				Comprar_criptomoedas (carteira, carteiraBit, carteiraEth, carteiraXrp, indice, senha);
-				break;
-			case 6:
-				Vender_criptomoedas (carteira, carteiraBit,carteiraEth,carteiraXrp,indice);
-				break;
-			case 7:
-				Atualizar_cotacao (indice);
-				break;
-			case 8:
-				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
-				printf("DESCONECTANDO...");
-				return 0;
-		}
-	}
+  while(1){
+    printf("\n");
+    printf("Bem vindo ao menu!\n");
+    printf("O que você deseja acessar?\n");
+    printf("--------------------------\n");
+    printf("1-Consultar saldo\n");
+    printf("2-Consultar extrato\n");
+    printf("3-Depositar reais\n");
+    printf("4-Sacar reais\n");
+    printf("5-Comprar criptomoedas:\n");
+    printf("6-Vender criptomoedas\n");
+    printf("7-Atualizar cotação\n");
+    printf("8-Sair\n");
+    scanf("%d", &cont);
+    printf("\n");
+
+
+      switch (cont){
+      case 1:
+        mostrarSaldo();
+        getchar();
+        break;
+      case 2:
+        extrato();
+        getchar();
+        break;
+      case 3:
+        depositar(carteira, carteiraBit, carteiraEth, carteiraXrp,cpf);
+        break;
+      case 4:
+        sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, senha);
+        getchar();
+        break;
+      case 5:
+        Comprar_criptomoedas (carteira, carteiraBit, carteiraEth, carteiraXrp, senha, cpf);
+          break;
+      case 7:
+        Atualiza_cotacao ();
+        getchar();
+        break;
+      case 8:
+        atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
+        printf("DESCONECTANDO...\n");
+        return;
+    }
+  }
 };
 
 int main()
 {
-	setlocale(LC_ALL, "portuguese");
-	
-	menu();
-	
-	system("pause");
-	return 0;
-};
+  setlocale(LC_ALL, "portuguese");
+  iniciacao_arquivos();
+  login(&indice);
+  menu(&indice);
 
+  system("pause");
+  return 0;
+}
