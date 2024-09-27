@@ -8,9 +8,9 @@ float bit = 342.089;
 float rip =  3.18;
 float eth = 12.980;
 char cpf[12];
-char senha[6];
-char cpf_lista[NUM_OF_USERS][12];
-char senha_lista[NUM_OF_USERS][7];
+char senha[7];
+char cpf_lista[NUM_OF_USERS][12]={"75764675332","56394345628","82347782002","51382457324","69186635859","37532705471","69477299553","20567586600","99462980233","14445337200"};
+char senha_lista[NUM_OF_USERS][7]={"123456","654321","135792","246813","102938","564738","987654","321654","456789","112233"};
 float carteira[NUM_OF_USERS]={};
 float carteiraBit[NUM_OF_USERS]={};
 float carteiraEth[NUM_OF_USERS]={};
@@ -20,31 +20,11 @@ int i = 0;
 
 //CARREGAMENTO DOS ARQUIVOS.
 void iniciacao_arquivos() {
-   FILE *cpfss = fopen("cpfs.bin", "r"); // Open the binary file in read mode
-
-
-    for (i = 0; i < NUM_OF_USERS && fgets(cpf_lista[i], 13, cpfss) != NULL; i++) {
-       
-        cpf_lista[i][strcspn(cpf_lista[i], "\n")] = 0;
-    }
-
-    fclose(cpfss); 
-  FILE *senhass = fopen("senhas.bin", "r"); // Open the binary file in read mode
-
-
-    for (i = 0; i < NUM_OF_USERS && fgets(senha_lista[i], 13, senhass) != NULL; i++) {
-       
-        senha_lista[i][strcspn(senha_lista[i], "\n")] = 0;
-    }
-
-    fclose(senhass); 
-
-//iniciação dos saldos agora
      FILE *carteirafile;
      FILE *carteirabitfile;
      FILE *carteiraethfile;
      FILE *carteiraxrpfile;
-     
+
      carteirafile = fopen("saldo.bin","rb");
      size_t lendo = fread(carteira, sizeof(float),10,carteirafile);
      fclose(carteirafile);
@@ -70,7 +50,7 @@ void login(int *indice){
     scanf("%11s", cpf);
     printf("Digite sua senha: ");
     scanf("%6s", senha);
-    
+
     for (int i = 0; i < NUM_OF_USERS; i++) {
       if (strcmp(cpf_lista[i], cpf)== 0) {
         if (strcmp(senha_lista[i],senha)==0){
@@ -79,12 +59,12 @@ void login(int *indice){
           return;
         }
 
-    
-      
+
+
       }
     }
     printf("CPF ou senha incorretos!\n");
-    
+
   }
 }
 
@@ -92,7 +72,7 @@ void login(int *indice){
 
 void extrato() {
     FILE *extratobanco;
-    
+
     char linha[1000]; 
 
     extratobanco = fopen("extrato.bin", "rb");
@@ -121,7 +101,7 @@ void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteir
      FILE *carteirabitfile;
      FILE *carteiraethfile;
      FILE *carteiraxrpfile;
-     
+
      carteirafile = fopen("saldo.bin","wb");
      size_t escrevendo = fwrite(carteira, sizeof(float),10,carteirafile);
      fclose(carteirafile);
@@ -145,7 +125,7 @@ void mostrarSaldo() {
     printf("| ETHEREUM: %.5f\n", carteiraEth[indice]);
     printf("| RIPPLE: %.5f\n", carteiraXrp[indice]);
     printf("--------------------------\n");
-	
+
     printf("\n<--- volte com 'ENTER'\n"); 
     getchar();
     return;	
@@ -183,11 +163,11 @@ void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carte
     struct tm tm=*localtime(&t);
     char sen[6];
     while(1){
-        
+
         printf("Quanto deseja sacar (ou 0 para não depositar): ");
         scanf("%f", &valor);
 
-        
+
         if (valor > carteira[indice]) {
             printf("ERRO: Você não pode sacar dinheiro a mais do que o disponível em sua carteira!! (carteira: %.2f)\n",
                   carteira[indice]);
@@ -212,55 +192,55 @@ void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carte
     fprintf(extratofile,"%s %s - %.2f REAIS CT:0.00    TX:0.00 REAL:%.2f BTC:%.6f ETH:%.5f XRP:%.3f\n", cpf, dataAtual, valor, carteira[indice], carteiraBit[indice], carteiraEth[indice], carteiraXrp[indice]);
 
     fclose(extratofile);
-    
+
     return;
 }
 
 // COMPRAR CRIPTOMOEDAS
 
 void Atualiza_cotacao(){
-    	srand(time(NULL));
+      srand(time(NULL));
 
-	int i;
-	
-	for (i = 0; i < 3; i++) {
-	        int num = rand() % 100;
+  int i;
 
-		switch (i) {
-	            case 0:
-	                if (num % 2 == 0) {
-	                    bit = bit + ((5 / 100.0) * bit);
-	                } else {
-	                    bit = bit - ((5 / 100.0) * bit);
-	                }
-	                break;
-	
-	            case 1:
-	                if (num % 2 == 0) {
-	                    eth = eth + ((5 / 100.0) * eth);
-	                } else {
-	                    eth = eth - ((5 / 100.0) * eth);
-	                }
-	                break;
-	
-	            case 2:
-	                if (num % 2 == 0) {
-	                    rip = rip + ((5 / 100.0) * rip);
-	                } else {
-	                    rip = rip - ((5 / 100.0) * rip);
-	                }
-	                break;
-	
-	            default:
-	                break;
-	        }
-	}
-	printf("Bitcoin: %.2f\n", bit);
-	printf("Ethereum: %.2f\n", eth);
-	printf("Ripple: %.2f\n", rip);
-	printf("\n");
-	printf("Cotação atualizada\n");
-	printf("\n<--- volte com 'ENTER'\n");
+  for (i = 0; i < 3; i++) {
+          int num = rand() % 100;
+
+    switch (i) {
+              case 0:
+                  if (num % 2 == 0) {
+                      bit = bit + ((5 / 100.0) * bit);
+                  } else {
+                      bit = bit - ((5 / 100.0) * bit);
+                  }
+                  break;
+
+              case 1:
+                  if (num % 2 == 0) {
+                      eth = eth + ((5 / 100.0) * eth);
+                  } else {
+                      eth = eth - ((5 / 100.0) * eth);
+                  }
+                  break;
+
+              case 2:
+                  if (num % 2 == 0) {
+                      rip = rip + ((5 / 100.0) * rip);
+                  } else {
+                      rip = rip - ((5 / 100.0) * rip);
+                  }
+                  break;
+
+              default:
+                  break;
+          }
+  }
+  printf("Bitcoin: %.2f\n", bit);
+  printf("Ethereum: %.2f\n", eth);
+  printf("Ripple: %.2f\n", rip);
+  printf("\n");
+  printf("Cotação atualizada\n");
+  printf("\n<--- volte com 'ENTER'\n");
   getchar();
   return;
 };
@@ -268,60 +248,62 @@ void Atualiza_cotacao(){
 //MOSTAR O MENU
 void menu(const int *indice){
 
-	int cont;
+  int cont;
 
-	while(1){
+  while(1){
     printf("\n");
-		printf("Bem vindo ao menu!\n");
-		printf("O que você deseja acessar?\n");
-		printf("--------------------------\n");
-		printf("1-Consultar saldo\n");
-		printf("2-Consultar extrato\n");
-		printf("3-Depositar reais\n");
-		printf("4-Sacar reais\n");
-		printf("5-Comprar criptomoedas:\n");
-		printf("6-Vender criptomoedas\n");
-		printf("7-Atualizar cotação\n");
-		printf("8-Sair\n");
-		scanf("%d", &cont);
+    printf("Bem vindo ao menu!\n");
+    printf("O que você deseja acessar?\n");
+    printf("--------------------------\n");
+    printf("1-Consultar saldo\n");
+    printf("2-Consultar extrato\n");
+    printf("3-Depositar reais\n");
+    printf("4-Sacar reais\n");
+    printf("5-Comprar criptomoedas:\n");
+    printf("6-Vender criptomoedas\n");
+    printf("7-Atualizar cotação\n");
+    printf("8-Sair\n");
+    scanf("%d", &cont);
     printf("\n");
 
-	
-	    switch (cont){
+
+      switch (cont){
       case 1:
         mostrarSaldo();
         getchar();
         break;
-			case 2:
-				extrato();
+      case 2:
+        extrato();
         getchar();
-				break;
-			case 3:
-				depositar(carteira, carteiraBit, carteiraEth, carteiraXrp,cpf);
-				break;
-			case 4:
-				sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, senha);
+        break;
+      case 3:
+        depositar(carteira, carteiraBit, carteiraEth, carteiraXrp,cpf);
+        break;
+      case 4:
+        sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, senha);
         getchar();
-				break;
-			case 7:
-				Atualiza_cotacao ();
+        break;
+      case 7:
+        Atualiza_cotacao ();
         getchar();
-				break;
-			case 8:
-				atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
-				printf("DESCONECTANDO...\n");
-				return;
-		}
-	}
+        break;
+      case 8:
+        atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
+        printf("DESCONECTANDO...\n");
+        return;
+    }
+  }
 };
 
 int main()
 {
-	setlocale(LC_ALL, "portuguese");
-	iniciacao_arquivos();
+  setlocale(LC_ALL, "portuguese");
+  iniciacao_arquivos();
+  printf("%s",cpf_lista[0]);
+  printf("%s", senha_lista[0]);
   login(&indice);
-	menu(&indice);
-	
-	system("pause");
-	return 0;
+  menu(&indice);
+
+  system("pause");
+  return 0;
 };
