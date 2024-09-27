@@ -89,7 +89,7 @@ void extrato() {
             }
         }
     }
-    
+
     fclose(extratobanco);
     printf("===================================================\n");
     printf("\n<--- volte com 'ENTER'\n");
@@ -523,29 +523,37 @@ void Atualiza_cotacao(){
 
   for (i = 0; i < 3; i++) {
           int num = rand() % 100;
-
+          int cot;  
     switch (i) {
               case 0:
                   if (num % 2 == 0) {
-                      bit = bit + ((5 / 100.0) * bit);
+                      cot = (rand() % 6);
+                      bit = bit + ((cot / 100.0) * bit);
                   } else {
-                      bit = bit - ((5 / 100.0) * bit);
+                      cot = (rand() % 6);
+                      bit = bit - ((cot / 100.0) * bit);
                   }
                   break;
 
               case 1:
                   if (num % 2 == 0) {
-                      eth = eth + ((5 / 100.0) * eth);
+                      cot = (rand() % 6);
+                      eth = eth + ((cot / 100.0) * eth);
                   } else {
-                      eth = eth - ((5 / 100.0) * eth);
+                      cot = (rand() % 6);
+                      eth = eth - ((cot / 100.0) * eth);
                   }
                   break;
 
               case 2:
                   if (num % 2 == 0) {
-                      rip = rip + ((5 / 100.0) * rip);
+                      cot = (rand() % 6);
+                      rip = rip + ((cot / 100.0) * rip);
+                      
                   } else {
-                      rip = rip - ((5 / 100.0) * rip);
+                      cot = (rand() % 6);
+                      rip = rip - ((cot / 100.0) * rip);
+                      
                   }
                   break;
 
@@ -565,39 +573,49 @@ void Atualiza_cotacao(){
 
 void Cotacao_inicial (){
     srand(time(NULL));
-    int i;
-    for (i = 0; i < 3; i++) {
-            int num = rand() % 100;
 
+      int i;
+
+      for (i = 0; i < 3; i++) {
+              int num = rand() % 100;
+              int cot;  
         switch (i) {
-                case 0:
-                    if (num % 2 == 0) {
-                        bit = bit + ((5 / 100.0) * bit);
-                    } else {
-                        bit = bit - ((5 / 100.0) * bit);
-                    }
-                    break;
+                  case 0:
+                      if (num % 2 == 0) {
+                          cot = (rand() % 6);
+                          bit = bit + ((cot / 100.0) * bit);
+                      } else {
+                          cot = (rand() % 6);
+                          bit = bit - ((cot / 100.0) * bit);
+                      }
+                      break;
 
-                case 1:
-                    if (num % 2 == 0) {
-                        eth = eth + ((5 / 100.0) * eth);
-                    } else {
-                        eth = eth - ((5 / 100.0) * eth);
-                    }
-                    break;
+                  case 1:
+                      if (num % 2 == 0) {
+                          cot = (rand() % 6);
+                          eth = eth + ((cot / 100.0) * eth);
+                      } else {
+                          cot = (rand() % 6);
+                          eth = eth - ((cot / 100.0) * eth);
+                      }
+                      break;
 
-                case 2:
-                    if (num % 2 == 0) {
-                        rip = rip + ((5 / 100.0) * rip);
-                    } else {
-                        rip = rip - ((5 / 100.0) * rip);
-                    }
-                    break;
+                  case 2:
+                      if (num % 2 == 0) {
+                          cot = (rand() % 6);
+                          rip = rip + ((cot / 100.0) * rip);
+                          
+                      } else {
+                          cot = (rand() % 6);
+                          rip = rip - ((cot / 100.0) * rip);
+                          
+                      }
+                      break;
 
-                default:
-                    break;
-            }
-    }
+                  default:
+                      break;
+              }
+      }
 };
 
 //MOSTAR O MENU
