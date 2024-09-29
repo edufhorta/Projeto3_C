@@ -19,7 +19,7 @@ O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários 
 - Atualizar cotação das criptomoedas aleatoriamente.
 
 ## Forma de execução 
-- baixe todos os arquivos desse "GITHUB" no "replit", se certifique que não estejam dentro de um pasta, mas postos diretamente no programa e execute o "corpo-projeto".
+- baixe a pasta "projeto c final" e depois coloque os arquivos no "replit" e se certifique que não estejam dentro da pasta, mas postos diretamente no programa e execute o "corpo-projeto".
 - Para entrar no programa digite um desses 10 logins (CPFS + senhas):
 1. CPF: 75764675332 // senha: 123456;
 2. CPF: 56394345628 // senha: 654321;
