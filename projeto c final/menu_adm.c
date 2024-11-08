@@ -6,7 +6,6 @@ void menu(){
 int cont;
 
     printf("\n");
-    printf("\n");
     printf("Bem vindo ao menu!\n");
     printf("O que você deseja acessar?\n");
     printf("--------------------------\n");
