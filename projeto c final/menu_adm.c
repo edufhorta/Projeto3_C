@@ -1,3 +1,6 @@
+#include "biblioteca.h"
+
+
 void menu(){
 
 int cont;
