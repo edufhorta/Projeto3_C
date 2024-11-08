@@ -5,7 +5,6 @@ void menu(){
 
 int cont;
 
-  while(1){
     printf("\n");
     printf("\n");
     printf("Bem vindo ao menu!\n");
@@ -22,6 +21,5 @@ int cont;
     scanf("%d", &cont);
     printf("\n");
     return cont;
-    
-  }
+  
 }
