@@ -37,7 +37,8 @@ int cont;
  //        printf("...\n");
  //        break;
  //      case 5:
- //        printf("...\n");
+ //        mostrarSaldo_adm( );
+ //        getchar();
  //        break;
  //      case 6:
  //        extrato_adm ();
