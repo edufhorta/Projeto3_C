@@ -1,30 +1,61 @@
 #include "biblioteca.h"
 
 
-int main()
-{
+int main(){
     float bit = 342089;
     float rip =  3.18;
     float eth = 12980;
-    char cpf[12];
-    char senha[7];
-    char cpf_lista[NUM_OF_USERS][12]={"75764675332","56394345628","82347782002","51382457324","69186635859","37532705471","69477299553","20567586600","99462980233","14445337200"};
-    char senha_lista[NUM_OF_USERS][7]={"123456","654321","135792","246813","102938","564738","987654","321654","456789","112233"};
+
     float carteira[NUM_OF_USERS]={};
     float carteiraBit[NUM_OF_USERS]={};
     float carteiraEth[NUM_OF_USERS]={};
     float carteiraXrp[NUM_OF_USERS]={};
-    int indice;
     int i = 0;
+    int indice;
+    char cpf[12];
+    char senha[7];
+    char cpf_lista[NUM_OF_USERS][12]={};
+    char senha_lista[NUM_OF_USERS][7]={};
+
   
-  setlocale(LC_ALL, "portuguese");
-  iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp);
-  login(&indice,cpf,senha,cpf_lista,senha_lista);
+  iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
+  int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
   Cotacao_inicial(&bit,&eth,&rip);
   while (1){  
 
-      int cont =menu();
-       switch (cont){
+    if (tipo_usuario==1){
+      int cont_adm = menu_adm();
+       switch (cont_adm){
+            case 1:
+              printf("...\n");
+              break;
+            case 2:
+              printf("...\n");
+              break;
+            case 3:
+              printf("...\n");
+              break;
+            case 4:
+              printf("...\n");
+              break;
+            case 5:
+              mostrarSaldo_adm(carteira,carteiraBit,carteiraEth,carteiraXrp);
+              getchar();
+              break;
+            case 6:
+              extrato_adm (cpf_lista[NUM_OF_USERS][12]);
+              getchar();
+              break;
+            case 7:
+              printf("...\n");
+            case 8:
+              printf("DESCONECTANDO...\n");
+              exit(0);
+              break;
+          }
+    } else if (tipo_usuario == 0) {
+      int cont_inv =menu();
+       switch (cont_inv){
             case 1:
               mostrarSaldo(carteira,carteiraBit,carteiraEth,carteiraXrp, &indice);
               getchar();
@@ -56,7 +87,7 @@ int main()
               exit(0);
               break;
        }
-
+    }
   }
   system("pause");
   return 0;
