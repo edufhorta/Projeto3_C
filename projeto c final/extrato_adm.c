@@ -1,3 +1,4 @@
+#include "biblioteca.h"
 void extrato_adm () {
 
   int i;
