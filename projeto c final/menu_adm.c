@@ -37,7 +37,7 @@ int cont;
  //        printf("...\n");
  //        break;
  //      case 5:
- //        mostrarSaldo_adm( );
+ //        mostrarSaldo_adm(carteira,carteiraBit,carteiraEth,carteiraXrp);
  //        getchar();
  //        break;
  //      case 6:
