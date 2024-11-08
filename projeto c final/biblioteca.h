@@ -5,13 +5,15 @@
 #include <string.h>
 #include <time.h>
 #include <locale.h>
-#define NUM_OF_USERS 10
+#define NUM_OF_USERS 1000
+#define MAX_CPF_LENGTH 12
+#define MAX_SENHA_LENGTH 7
 
 //FUNÇÕES
-void iniciacao_arquivos(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp);
+void iniciacao_arquivos(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, char *cpf_lista, char *senha_lista);
 void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteiraEth,float *carteiraXrp);
 void mostrarSaldo(float *carteira, float *carteiraBit, float *carteiraEth,float *carteiraXrp, int *indice);
-void login(int *indice, char *cpf, char *senha, char *cpf_lista[NUM_OF_USERS][12], char *senha_lista[NUM_OF_USERS][7]);
+int login_novo(int *indice, char *cpf, char *senha, char *cpf_lista[NUM_OF_USERS][12], char *senha_lista[NUM_OF_USERS][7]);
 void extrato( char *cpf);
 void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteiraEth,float *carteiraXrp);
 void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carteiraXrp, const char *cpf, int *indice);
@@ -21,4 +23,5 @@ void Vender_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth
 void Atualiza_cotacao(float *bit, float *eth, float *rip);
 void Cotacao_inicial(float *bit, float *eth, float *rip);
 int menu();
+int menu_adm();
 #endif
