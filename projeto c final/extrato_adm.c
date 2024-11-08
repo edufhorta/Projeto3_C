@@ -13,7 +13,7 @@ void extrato_adm () {
 
     char linha[1000];
 
-    extratobanco = fopen("extrato.txt", "r");
+    extratobanco = fopen("extrato.bin", "rb");
 
 
     while (fgets(linha, sizeof(linha), extratobanco) != NULL) {
