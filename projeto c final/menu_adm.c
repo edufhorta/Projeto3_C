@@ -47,5 +47,7 @@ int cont;
  //      case 7:
  //        printf("...\n");
  //      case 8:
- //        printf("...\n");
+ //        printf("DESCONECTANDO...\n");
+ //           exit(0);
+ //           break;
  //    }
