@@ -22,33 +22,6 @@ int cont;
     scanf("%d", &cont);
     printf("\n");
     return cont;
-    scanf("%d", &cont);
-    printf("\n");
-
-
-      switch (cont){
-      case 1:
-        printf("...\n");
-        break;
-      case 2:
-        printf("...\n");
-        break;
-      case 3:
-        printf("...\n");
-        break;
-      case 4:
-        printf("...\n");
-        break;
-      case 5:
-        printf("...\n");
-        break;
-      case 6:
-        printf("...\n");
-        break;
-      case 7:
-        printf("...\n");
-      case 8:
-        printf("...\n");
-    }
+    
   }
 }
