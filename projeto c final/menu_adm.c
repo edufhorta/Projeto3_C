@@ -40,7 +40,8 @@ int cont;
  //        printf("...\n");
  //        break;
  //      case 6:
- //        printf("...\n");
+ //        extrato_adm ();
+ //        getchar();
  //        break;
  //      case 7:
  //        printf("...\n");
