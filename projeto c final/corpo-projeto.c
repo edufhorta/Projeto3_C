@@ -27,7 +27,8 @@ int main(){
       int cont_adm = menu_adm();
        switch (cont_adm){
             case 1:
-              printf("...\n");
+              cadastrar_inv(cpf_lista);
+              getchar();
               break;
             case 2:
               printf("...\n");
@@ -39,11 +40,11 @@ int main(){
               printf("...\n");
               break;
             case 5:
-              mostrarSaldo_adm(carteira,carteiraBit,carteiraEth,carteiraXrp);
+              mostrarSaldo_adm(carteira, carteiraBit, carteiraEth, carteiraXrp, cpf_lista);
               getchar();
               break;
             case 6:
-              extrato_adm (cpf_lista[NUM_OF_USERS][12]);
+              extrato_adm(cpf_lista, senha_lista);
               getchar();
               break;
             case 7:
