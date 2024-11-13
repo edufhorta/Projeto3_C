@@ -24,9 +24,7 @@ void Atualiza_cotacao(float *bit, float *eth, float *rip);
 void Cotacao_inicial(float *bit, float *eth, float *rip);
 void extrato_adm (char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS][7]);
 void mostrarSaldo_adm(float *carteira, float *carteiraBit, float *carteiraEth,float *carteiraXrp, char cpf_lista[NUM_OF_USERS][12]);
-
 void cadastrar_inv(char cpf_lista[NUM_OF_USERS][12]);
-
 int menu();
 int menu_adm();
 #endif
