@@ -4,7 +4,7 @@
 void extrato_adm(char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS][7]) {
     int i;
     char cpf_inv[12];
-    char buffer[2000];
+    char compiler[2000];
     FILE *arquivoini, *arquivoini2;
 
     
@@ -13,9 +13,9 @@ void extrato_adm(char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS
         printf("Erro ao abrir o arquivo de login.\n");
         return;
     }
-    for (i = 0; i < NUM_OF_USERS && fgets(buffer, sizeof(buffer), arquivoini); i++) {
-        buffer[strcspn(buffer, "\n")] = 0;  
-        strcpy(cpf_lista[i], buffer);
+    for (i = 0; i < NUM_OF_USERS && fgets(compiler, sizeof(compiler), arquivoini); i++) {
+        compiler[strcspn(compiler, "\n")] = 0;  
+        strcpy(cpf_lista[i], compiler);
     }
     fclose(arquivoini);
 
@@ -25,9 +25,9 @@ void extrato_adm(char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS
         printf("Erro ao abrir o arquivo de senhas.\n");
         return;
     }
-    for (i = 0; i < NUM_OF_USERS && fgets(buffer, sizeof(buffer), arquivoini2); i++) {
-        buffer[strcspn(buffer, "\n")] = 0;  
-        strcpy(senha_lista[i], buffer);
+    for (i = 0; i < NUM_OF_USERS && fgets(compiler, sizeof(compiler), arquivoini2); i++) {
+        compiler[strcspn(compiler, "\n")] = 0;  
+        strcpy(senha_lista[i], compiler);
     }
     fclose(arquivoini2);
 
@@ -52,11 +52,11 @@ void extrato_adm(char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS
                 }
 
                 
-                while (fgets(buffer, sizeof(buffer), extratobanco)) {
-                    char *espaco = strchr(buffer, ' ');
+                while (fgets(compiler, sizeof(compiler), extratobanco)) {
+                    char *espaco = strchr(compiler, ' ');
                     if (espaco != NULL) {
                         *espaco = '\0';
-                        if (strcmp(buffer, cpf_inv) == 0) {
+                        if (strcmp(compiler, cpf_inv) == 0) {
                             printf("%s\n", espaco + 1);
                         }
                     }
