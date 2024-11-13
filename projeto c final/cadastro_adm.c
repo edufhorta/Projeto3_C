@@ -3,6 +3,7 @@
 void cadastrar_inv(char cpf_lista[NUM_OF_USERS][12]) {
   
   char login[12], senha[7];
+    char nome[1000];
   
   FILE *arquivo, *arquivo2;
 
@@ -11,6 +12,8 @@ void cadastrar_inv(char cpf_lista[NUM_OF_USERS][12]) {
       int cpf_duplicado = 0;
 
       printf("Vamos cadastrar o investidor!\n");
+      printf("Digite o nome do investidor: ");
+      scanf("%s", nome);
       printf("Digite o CPF do investidor: ");
       scanf("%11s", login);
 
@@ -29,7 +32,7 @@ void cadastrar_inv(char cpf_lista[NUM_OF_USERS][12]) {
   printf("Crie uma senha para o investidor: ");
   scanf("%6s", senha);
 
-  printf("\nÓtimo, o investidor foi cadastrado!\n");
+  printf("\nÓtimo, o(a) %s foi cadastrado(a)!\n", nome);
 
   
   arquivo = fopen("login.txt", "a");
