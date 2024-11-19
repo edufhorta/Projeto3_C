@@ -16,6 +16,8 @@ int main(){
     typedef struct {
     char nome[50];
     float valor;
+    float cotven;
+    float cotcomp;
     } cotacao;
 
   
@@ -50,7 +52,7 @@ int main(){
               getchar();
               break;
             case 7:
-              printf("...\n");
+              Atualiza_cotacao("crip.txt");
             case 8:
               printf("DESCONECTANDO...\n");
               exit(0);
