@@ -21,6 +21,7 @@ void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carte
 void Comprar_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *senha,const char *cpf, int *indice, float *bit, float *eth, float *rip);
 void Vender_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *cpf, int *indice, float *bit, float *eth, float *rip);
 void Atualiza_cotacao(float *bit, float *eth, float *rip);
+void adicionar_criptomoeda(const char *crip);
 int carrega_cotacao(const char *crip, cotacao **cotacoes);
 void extrato_adm (char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS][7]);
 void mostrarSaldo_adm(float *carteira, float *carteiraBit, float *carteiraEth,float *carteiraXrp, char cpf_lista[NUM_OF_USERS][12]);
