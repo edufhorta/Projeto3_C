@@ -84,7 +84,6 @@ int main(){
               break;
             case 7:
               Atualiza_cotacao("crip.txt");
-              getchar();
               break;
             case 8:
               atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
