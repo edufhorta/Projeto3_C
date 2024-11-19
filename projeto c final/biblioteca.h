@@ -12,6 +12,7 @@
 //FUNÇÕES
 void iniciacao_arquivos(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, char *cpf_lista, char *senha_lista);
 void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteiraEth,float *carteiraXrp);
+void apagarCripto(cotacao *cripto);
 void mostrarSaldo(float *carteira, float *carteiraBit, float *carteiraEth,float *carteiraXrp, int *indice);
 int login_novo(int *indice, char *cpf, char *senha, char *cpf_lista[NUM_OF_USERS][12], char *senha_lista[NUM_OF_USERS][7]);
 void extrato( char *cpf);
