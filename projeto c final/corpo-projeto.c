@@ -21,7 +21,8 @@ int main(){
   
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
-  int carrega_cotacao(const char *crip, cotacao **cotacoes);
+  cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
+    int num_cot = carrega_cotacao("crip.bin", &loaded_cotacoes);
   while (1){  
 
     if (tipo_usuario==1){
