@@ -38,7 +38,8 @@ int main(){
               printf("...\n");
               break;
             case 3:
-              adicionar_criptomoeda("crip.txt");
+              criacao_cripto("crip.txt");
+                getchar();
               break;
             case 4:
               printf("...\n");

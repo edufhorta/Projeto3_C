@@ -50,6 +50,8 @@ void Atualiza_cotacao(const char *crip){
     rename("temp.txt", crip);
 
     printf("\nCotações atualizadas com sucesso!\n");
+      mostrar_cotacoes("crip.txt");
+      
   getchar();
   
 };
