@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <locale.h>
-
+#include "biblioteca.h"
 
 
 void criacao_cripto() {
@@ -38,12 +34,4 @@ void criacao_cripto() {
 
     printf("Dados salvos no arquivo '%s' com sucesso.\n", filename);
 
-}
-
-int main() {
-	setlocale(LC_ALL,("portuguese"));
-    criacao_cripto();
-
-    system("pause"); 
-    return 0;
 }
