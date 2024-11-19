@@ -52,7 +52,7 @@ int main(){
               getchar();
               break;
             case 7:
-              printf("...\n");
+              Atualiza_cotacao("crip.txt");
             case 8:
               printf("DESCONECTANDO...\n");
               exit(0);
@@ -83,7 +83,7 @@ int main(){
               Vender_criptomoedas(carteira, carteiraBit, carteiraEth, carteiraXrp, cpf,&indice,&bit,&eth,&rip);
               break;
             case 7:
-              Atualiza_cotacao(&bit,&eth,&rip);
+              Atualiza_cotacao("crip.txt");
               getchar();
               break;
             case 8:
