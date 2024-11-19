@@ -1,37 +1,35 @@
 #include "biblioteca.h"
 
 
-void criacao_cripto() {
-    FILE *arquivo;
-    char nome_cripto[50]; // Buffer for the cryptocurrency name
-    int valor_ini;
-    float cot_ven, cot_comp;
+void criacao_cripto(const char *crip) {
+     FILE *arquivo = fopen(crip, "a"); // Abre o arquivo texto em modo de adição
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo '%s'\n", crip);
+        return;
+    }
 
-    // Input cryptocurrency details
-    printf("Escolha um nome para a sua criptomoeda: ");
-    scanf("%49s", nome_cripto); // Limit input to prevent overflow
-    printf("Escolha seu valor inicial: ");
-    scanf("%d", &valor_ini);
-    printf("Escolha sua cotação...\n");
-    printf("De Venda: ");
-    scanf("%f", &cot_ven); // Use %f for float
-    printf("E de Compra: ");
-    scanf("%f", &cot_comp); // Use %f for float
+    char nome[50];
+    float valor, cotven, cotcomp;
 
-    // Create the filename
-    int array[10];
-    char filename[60]; // Buffer to hold the filename
-    snprintf(filename, sizeof(filename), "saldo%s.bin", nome_cripto); // Create filename
+    // Solicita os dados da nova criptomoeda
+    printf("Digite o nome da criptomoeda: ");
+    scanf("%49s", nome);
 
+    printf("Digite o valor inicial da criptomoeda: ");
+    scanf("%f", &valor);
 
-    arquivo = fopen(filename, "wb");
+    printf("Digite a taxa de venda: ");
+    scanf("%f", &cotven);
 
-    
-    size_t escrevao = fwrite(array, sizeof(array), 10, arquivo);
+    printf("Digite a taxa de compra: ");
+    scanf("%f", &cotcomp);
 
+    // Escreve os dados no arquivo texto
+    fprintf(arquivo, "%s %.2f %.2f %.2f\n", nome, valor, cotven, cotcomp);
 
-    fclose(arquivo);
+    printf("Criptomoeda '%s' adicionada com sucesso: Valor: %.2f, Taxa de Venda: %.2f, Taxa de Compra: %.2f\n",
+           nome, valor, cotven, cotcomp);
 
-    printf("Dados salvos no arquivo '%s' com sucesso.\n", filename);
+    fclose(arquivo); // Fecha o arquivo
 
 }
