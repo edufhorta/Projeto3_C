@@ -2,10 +2,6 @@
 
 
 int main(){
-    float bit = 342089;
-    float rip =  3.18;
-    float eth = 12980;
-
     float carteira[NUM_OF_USERS]={};
     float carteiraBit[NUM_OF_USERS]={};
     float carteiraEth[NUM_OF_USERS]={};
@@ -17,10 +13,16 @@ int main(){
     char cpf_lista[NUM_OF_USERS][12]={};
     char senha_lista[NUM_OF_USERS][7]={};
 
+    typedef struct {
+    char nome[50];
+    float valor;
+    } cotacao;
+
   
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
-  Cotacao_inicial(&bit,&eth,&rip);
+  cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
+    int num_cot = carrega_cotacao("crip.bin", &loaded_cotacoes);
   while (1){  
 
     if (tipo_usuario==1){
