@@ -1,19 +1,25 @@
 #include "biblioteca.h"
 
-void adiciona_criptomoeda(const char *crip, const char *nome, float valor) {
-    FILE *arquivo = fopen(crip, "ab"); // Abre o arquivo em modo de adição binária
+void adicionar_criptomoeda(const char *crip) {
+    FILE *arquivo = fopen(crip, "a"); // Abre o arquivo em modo de adição de texto
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo\n");
         return;
     }
 
     cotacao novaCotacao;
-    strncpy(novaCotacao.nome, nome, sizeof(novaCotacao.nome) - 1);
-    novaCotacao.nome[sizeof(novaCotacao.nome) - 1] = '\0'; // Garante o término da string
-    novaCotacao.valor = valor;
 
-    fwrite(&novaCotacao, sizeof(cotacao), 1, arquivo); // Adiciona a nova cotação ao arquivo
-    printf("Criptomoeda adicionada: %s -> %.2f\n", novaCotacao.nome, novaCotacao.valor);
+    // Solicita os dados da nova criptomoeda
+    printf("Digite o nome da criptomoeda: ");
+    scanf("%29s", novaCotacao.nome); // Limita o tamanho do nome para evitar estouro de buffer
 
-    fclose(arquivo);
+    printf("Digite o valor inicial da criptomoeda: ");
+    scanf("%f", &novaCotacao.valor);
+
+    // Grava a nova criptomoeda no arquivo como texto
+    fprintf(arquivo, "%s %.2f\n", novaCotacao.nome, novaCotacao.valor);
+
+    printf("Criptomoeda adicionada com sucesso: %s -> %.2f\n", novaCotacao.nome, novaCotacao.valor);
+
+    fclose(arquivo); // Fecha o arquivo após a escrita
 }
