@@ -16,6 +16,8 @@ int main(){
     typedef struct {
     char nome[50];
     float valor;
+    float cotven;
+    float cotcomp;
     } cotacao;
 
   
