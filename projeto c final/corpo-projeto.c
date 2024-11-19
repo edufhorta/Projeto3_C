@@ -36,7 +36,7 @@ int main(){
               printf("...\n");
               break;
             case 3:
-              printf("...\n");
+              adicionar_criptomoeda("crip.txt");
               break;
             case 4:
               printf("...\n");
