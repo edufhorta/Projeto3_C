@@ -24,7 +24,7 @@ int main(){
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
   cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
-    int num_cot = carrega_cotacao("crip.bin", &loaded_cotacoes);
+    int num_cot = carrega_cotacao("crip.txt", &loaded_cotacoes);
   while (1){  
 
     if (tipo_usuario==1){
@@ -38,7 +38,7 @@ int main(){
               printf("...\n");
               break;
             case 3:
-              printf("...\n");
+              adicionar_criptomoeda("crip.txt");
               break;
             case 4:
               printf("...\n");
@@ -83,8 +83,7 @@ int main(){
               Vender_criptomoedas(carteira, carteiraBit, carteiraEth, carteiraXrp, cpf,&indice,&bit,&eth,&rip);
               break;
             case 7:
-              Atualiza_cotacao(&bit,&eth,&rip);
-              getchar();
+              Atualiza_cotacao("crip.txt");
               break;
             case 8:
               atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
