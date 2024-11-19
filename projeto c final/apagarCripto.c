@@ -1,5 +1,6 @@
 #include "biblioteca.h"
 void apagarCripto(cotacao *cripto) {
+    FILE *arquivo;
     char nome_cripto[50];
 
     printf("Qual criptomoeda você gostaria de apagar: ");
@@ -15,4 +16,7 @@ void apagarCripto(cotacao *cripto) {
         cripto[i].cotcomp =0.0;
     }
     }
+  arquivo= fopen("crip.txt","w");
+  fwrite(cripto,sizeof(cripto),1,arquivo);
+  fclose(arquivo);
 }
