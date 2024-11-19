@@ -16,3 +16,4 @@ void adiciona_criptomoeda(const char *crip, const char *nome, float valor) {
     printf("Criptomoeda adicionada: %s -> %.2f\n", novaCotacao.nome, novaCotacao.valor);
 
     fclose(arquivo);
+}
