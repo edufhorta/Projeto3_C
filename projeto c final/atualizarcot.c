@@ -7,8 +7,7 @@ void Atualiza_cotacao(const char *crip){
         return;
     }
 
-    // Cria um arquivo temporário para armazenar as cotações atualizadas
-    FILE *temp = fopen("temp.txt", "w");
+    FILE *temp = fopen("temp.txt", "w"); // Cria um arquivo temporário
     if (temp == NULL) {
         printf("Erro ao criar o arquivo temporário\n");
         fclose(arquivo);
@@ -17,12 +16,12 @@ void Atualiza_cotacao(const char *crip){
 
     srand(time(NULL)); // Inicializa o gerador de números aleatórios
 
-    char nome[30];
-    float valor;
+    char nome[50];
+    float valor, cotven, cotcomp;
 
-    // Lê cada linha do arquivo texto, atualiza o valor e grava no arquivo temporário
-    while (fscanf(arquivo, "%29s %f", nome, &valor) == 2) {
-        int num = rand() % 100; // Gera um número aleatório entre 0 e 99
+    // Lê cada linha do arquivo original
+    while (fscanf(arquivo, "%49s %f %f %f", nome, &valor, &cotven, &cotcomp) == 4) {
+        int num = rand() % 100; // Número aleatório entre 0 e 99
 
         // Atualiza o valor com aumento ou redução de 5%
         if (num % 2 == 0) {
@@ -31,11 +30,12 @@ void Atualiza_cotacao(const char *crip){
             valor -= ((5 / 100.0) * valor);
         }
 
-        // Escreve a cotação atualizada no arquivo temporário
-        fprintf(temp, "%s %.2f\n", nome, valor);
+        // Escreve os valores atualizados no arquivo temporário, mantendo as taxas
+        fprintf(temp, "%s %.2f %.2f %.2f\n", nome, valor, cotven, cotcomp);
 
         // Exibe a atualização no console
-        printf("Atualizado: %s -> %.2f\n", nome, valor);
+        printf("Atualizado: %s -> Valor: %.2f, Taxa de Venda: %.2f, Taxa de Compra: %.2f\n",
+               nome, valor, cotven, cotcomp);
     }
 
     fclose(arquivo); // Fecha o arquivo original
