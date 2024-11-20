@@ -13,24 +13,19 @@ int main(){
     char cpf_lista[NUM_OF_USERS][12]={};
     char senha_lista[NUM_OF_USERS][7]={};
 
-    typedef struct {
-    char nome[50];
-    float valor;
-    float cotven;
-    float cotcomp;
-    } cotacao;
-
-    typedef struct{
-    char cpf[11];
-    cotacao moedas;
-    int num_moedas;
-} carteira;
 
   
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
   cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
+    copiarCpfsParaCarteira(carteiras, cpf_lista, NUM_OF_USERS);
+        cotacao cotacoes[MAX_MOEDAS];
+    int num_cotacoes = 0;
+
+
+    lerCotacoes(cotacoes, &num_cotacoes);
     int num_cot = carrega_cotacao("crip.txt", &loaded_cotacoes);
+    
   while (1){  
 
     if (tipo_usuario==1){
