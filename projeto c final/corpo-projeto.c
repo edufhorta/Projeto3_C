@@ -43,7 +43,7 @@ int main(){
                 getchar();
               break;
             case 4:
-              printf("...\n");
+              apagarCripto(cotacoes);
               break;
             case 5:
               mostrarSaldo_adm(carteira,carteiras, cpf_lista);
@@ -79,10 +79,10 @@ int main(){
               getchar();
               break;
             case 5:
-              Comprar_criptomoedas(carteira,cotacoes, senha, cpf,&indice);
+              Comprar_criptomoedas(carteira,carteiras,cotacoes, senha, cpf,&indice);
               break;
             case 6:
-              Vender_criptomoedas(carteira, cotacoes,cpf,&indice);
+              Vender_criptomoedas(carteira,carteiras, cotacoes,cpf,&indice);
               break;
             case 7:
               Atualiza_cotacao("crip.txt");
