@@ -9,6 +9,12 @@
 #define MAX_CPF_LENGTH 12
 #define MAX_SENHA_LENGTH 7
 
+typedef struct {
+    char nome[MAX_NOME_MOEDA];
+    float valor;
+    float cotven;
+    float cotcomp;
+} cotacao;
 
 typedef struct {
     char cpf[MAX_CPF_LENGTH]; 
