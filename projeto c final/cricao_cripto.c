@@ -1,8 +1,8 @@
 #include "biblioteca.h"
 
 
-void criacao_cripto(const char *crip) {
-     FILE *arquivo = fopen(crip, "a"); // Abre o arquivo texto em modo de adição
+void criacao_cripto(const char *cripto) {
+     FILE *arquivo = fopen(cripto, "a"); // Abre o arquivo texto em modo de adição
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo '%s'\n", crip);
         return;
