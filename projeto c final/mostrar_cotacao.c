@@ -1,7 +1,7 @@
 #include "biblioteca.h"
 
-void mostrar_cotacoes(const char *crip) {
-    FILE *arquivo = fopen(crip, "r"); // Abre o arquivo texto em modo leitura
+void mostrar_cotacoes(const char *cripto) {
+    FILE *arquivo = fopen(cripto, "r"); // Abre o arquivo texto em modo leitura
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo '%s'\n", crip);
         return;
