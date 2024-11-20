@@ -19,7 +19,7 @@ int main(){
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
   cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
     copiarCpfsParaCarteira(carteiras, cpf_lista, NUM_OF_USERS);
-        cotacao cotacoes[MAX_MOEDAS];
+       
     int num_cotacoes = 0;
 
 
@@ -46,7 +46,7 @@ int main(){
               printf("...\n");
               break;
             case 5:
-              mostrarSaldo_adm(carteira, carteiraBit, carteiraEth, carteiraXrp, cpf_lista);
+              mostrarSaldo_adm(carteira,carteiras, cpf_lista);
               getchar();
               break;
             case 6:
@@ -64,7 +64,7 @@ int main(){
       int cont_inv =menu();
        switch (cont_inv){
             case 1:
-              mostrarSaldo(carteira,carteiraBit,carteiraEth,carteiraXrp, &indice);
+              mostrarSaldo(carteira,, &indice);
               getchar();
               break;
             case 2:
@@ -72,23 +72,23 @@ int main(){
               getchar();
               break;
             case 3:
-              depositar(carteira, carteiraBit, carteiraEth, carteiraXrp,cpf,&indice);
+              depositar(carteira, ,cpf,&indice);
               break;
             case 4:
-              sacar(carteira, carteiraBit, carteiraEth, carteiraXrp, senha, &indice,cpf);
+              sacar(carteira, , senha, &indice,cpf);
               getchar();
               break;
             case 5:
-              Comprar_criptomoedas(carteira, carteiraBit, carteiraEth, carteiraXrp, senha, cpf,&indice,&bit,&eth,&rip);
+              Comprar_criptomoedas(carteira,cotacoes, senha, cpf,&indice);
               break;
             case 6:
-              Vender_criptomoedas(carteira, carteiraBit, carteiraEth, carteiraXrp, cpf,&indice,&bit,&eth,&rip);
+              Vender_criptomoedas(carteira, cotacoes,cpf,&indice);
               break;
             case 7:
               Atualiza_cotacao("crip.txt");
               break;
             case 8:
-              atualizacao_das_carteiras(carteira,carteiraBit,carteiraEth,carteiraXrp);
+              atualizacao_das_carteiras(carteira,cotacoes);
               printf("DESCONECTANDO...\n");
               exit(0);
               break;
