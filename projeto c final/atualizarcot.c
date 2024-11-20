@@ -1,7 +1,7 @@
 #include "biblioteca.h"
 
-void Atualiza_cotacao(const char *crip){
-      FILE *arquivo = fopen(crip, "r"); // Abre o arquivo texto para leitura
+void Atualiza_cotacao(const char *cripto){
+      FILE *arquivo = fopen(cripto, "r"); // Abre o arquivo texto para leitura
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo para leitura\n");
         return;
@@ -47,10 +47,10 @@ void Atualiza_cotacao(const char *crip){
 
     // Substitui o arquivo original pelo arquivo temporário
     remove(crip);
-    rename("temp.txt", crip);
+    rename("temp.txt", cripto);
 
     printf("\nCotações atualizadas com sucesso!\n");
-      mostrar_cotacoes("crip.txt");
+      mostrar_cotacoes("cripto.txt");
       
   getchar();
   
