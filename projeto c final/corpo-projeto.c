@@ -15,7 +15,7 @@ int main(){
     carteira carteiras[NUM_OF_USERS];
     cotacao cotacoes[NUM_OF_USERS];
   
-  iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
+  iniciacao_arquivos(carteira);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
   cotacao *loaded_cotacoes = NULL;  // Ponteiro para armazenar as cotações carregadas
     copiarCpfsParaCarteira(carteiras, cpf_lista, NUM_OF_USERS);
