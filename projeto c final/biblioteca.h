@@ -23,6 +23,8 @@ typedef struct {
 } carteira;
 
 //FUNÇÕES
+void copiarCpfsParaCarteira(carteira* carteiras, char cpf_lista[NUM_OF_USERS][MAX_CPF_LENGTH], int num_usuarios)
+void lerCotacoes(cotacao* cotacoes, int* num_cotacoes)
 void iniciacao_arquivos(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, char *cpf_lista, char *senha_lista);
 void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteiraEth,float *carteiraXrp);
 void apagarCripto(cotacao *cripto);
