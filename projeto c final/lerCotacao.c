@@ -1,3 +1,4 @@
+#include "biblioteca.h"
 void lerCotacoes(cotacao* cotacoes, int* num_cotacoes) {
     FILE *arquivo_cotacoes;
     char linha[200];
