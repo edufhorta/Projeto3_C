@@ -9,6 +9,13 @@
 #define MAX_CPF_LENGTH 12
 #define MAX_SENHA_LENGTH 7
 
+
+typedef struct {
+    char cpf[MAX_CPF_LENGTH]; 
+    cotacao moedas[MAX_MOEDAS];
+    int num_moedas;            
+} carteira;
+
 //FUNÇÕES
 void iniciacao_arquivos(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, char *cpf_lista, char *senha_lista);
 void atualizacao_das_carteiras(float *carteira,float *carteiraBit,float *carteiraEth,float *carteiraXrp);
