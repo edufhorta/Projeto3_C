@@ -11,9 +11,12 @@ void Vender_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth
     tm = *localtime(&t);
 
     printf("Vender Cripto:\n");
-    printf("1 - Bitcoin\n");
-    printf("2 - Ethereum\n");
-    printf("3 - Ripple\n");
+    for (int i=0;i<sizeof(criptomoeda);i++){
+        if (criptomoeda[i].valor == 0){
+            continue;
+        }
+    printf("%d- %s",criptomoeda[i].nome);
+    }
     scanf("%d", &opcao);
 
     switch (opcao) {
