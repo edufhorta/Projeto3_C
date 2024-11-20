@@ -21,10 +21,10 @@ void depositar(float*carteira, float*carteiraBit, float*carteiraEth, float*carte
 void sacar(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *senha, int *indice, char *cpf);
 void Comprar_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *senha,const char *cpf, int *indice, float *bit, float *eth, float *rip);
 void Vender_criptomoedas(float *carteira, float *carteiraBit, float *carteiraEth, float *carteiraXrp, const char *cpf, int *indice, float *bit, float *eth, float *rip);
-void Atualiza_cotacao(const char *crip);
-void mostrar_cotacoes(const char *crip);
-void criacao_cripto(const char *crip);
-int carrega_cotacao(const char *crip, cotacao **cotacoes);
+void Atualiza_cotacao(const char *cripto);
+void mostrar_cotacoes(const char *cripto);
+void criacao_cripto(const char *cripto);
+int carrega_cotacao(const char *cripto, cotacao **cotacoes);
 void extrato_adm (char cpf_lista[NUM_OF_USERS][12], char senha_lista[NUM_OF_USERS][7]);
 void mostrarSaldo_adm(float *carteira, float *carteiraBit, float *carteiraEth,float *carteiraXrp, char cpf_lista[NUM_OF_USERS][12]);
 void cadastrar_inv(char cpf_lista[NUM_OF_USERS][12]);
