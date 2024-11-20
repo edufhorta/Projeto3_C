@@ -64,7 +64,7 @@ int main(){
       int cont_inv =menu();
        switch (cont_inv){
             case 1:
-              mostrarSaldo(carteira,, &indice);
+              mostrarSaldo(carteira,carteiras, &indice);
               getchar();
               break;
             case 2:
@@ -72,10 +72,10 @@ int main(){
               getchar();
               break;
             case 3:
-              depositar(carteira, ,cpf,&indice);
+              depositar(carteira,cpf,&indice);
               break;
             case 4:
-              sacar(carteira, , senha, &indice,cpf);
+              sacar(carteira, senha, &indice,cpf);
               getchar();
               break;
             case 5:
