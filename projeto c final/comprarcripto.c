@@ -1,6 +1,5 @@
 #include "biblioteca.h"
-
-void Comprar_criptomoedas(cotacao *criptomoeda,float *carteira,, const char *senha,const char *cpf, int *indice) {
+void Comprar_criptomoedas(cotacao *cotacoes,float *carteira,, const char *senha,const char *cpf, int *indice) {
     int opcao;
     float valor, quantidade, taxa, total;
     FILE *file;
@@ -10,22 +9,22 @@ void Comprar_criptomoedas(cotacao *criptomoeda,float *carteira,, const char *sen
     struct tm tm = *localtime(&t);
 
     printf("Comprar Cripto:\n");
-    for (int i=0;i<sizeof(criptomoeda);i++){
-        if (criptomoeda[i].valor == 0){
+    for (int i=0;i<sizeof(cotacoes);i++){
+        if (cotacoes[i].valor == 0){
             continue;
         }
-    printf("%d- %s",criptomoeda[i].nome);
+    printf("%d- %s",cotacoes[i].nome);
     }
     printf("Escolha uma opção: ");
     scanf("%d", &opcao);
 
 
-       
-            printf("Quanto de %s gostaria de comprar? (Taxa de compra = %f%) R$ ",criptomoeda[i].nome,criptomoeda[i].cotcomp);
+
+            printf("Quanto de %s gostaria de comprar? (Taxa de compra = %f%) R$ ",cotacoes[i].nome,cotacoes[i].cotcomp);
             scanf("%f", &valor);
             while (valor > carteira[*indice]) {
                 printf("ERRO: Você não pode comprar mais do que o disponível em sua carteira!! (carteira: %.2f)\n", carteira[*indice]);
-                printf("Quanto de %s gostaria de comprar? (Taxa de compra = %f%) R$ ",criptomoeda[i].nome,criptomoeda[i].cotcomp);
+                printf("Quanto de %s gostaria de comprar? (Taxa de compra = %f%) R$ ",cotacoes[i].nome,cotacoes[i].cotcomp);
                 scanf("%f", &valor);
             }
             // Solicitar a senha
@@ -38,13 +37,13 @@ void Comprar_criptomoedas(cotacao *criptomoeda,float *carteira,, const char *sen
                     printf("Senha incorreta, tente novamente.\n");
                 }
             }
-            taxa = (criptomoeda[i].cotcomp / 100.00) * valor;
+            taxa = (cotacoes[i].cotcomp / 100.00) * valor;
             total = valor - taxa;
-            quantidade = total / *criptomoeda[i].valor;
+            quantidade = total / *cotacoes[i].valor;
 
 
             while (1) {
-                printf("Compra de %.6f %s: %.2f - %.2f (Taxa de Compra) = %.2f\n", quantidade,criptomoeda[i].nome, valor, taxa, total);
+                printf("Compra de %.6f %s: %.2f - %.2f (Taxa de Compra) = %.2f\n", quantidade,cotacoes[i].nome, valor, taxa, total);
                 printf("Confirmação de transação -  (s/n): ");
                 getchar(); 
                 scanf("%c", &confirma);
@@ -58,7 +57,7 @@ void Comprar_criptomoedas(cotacao *criptomoeda,float *carteira,, const char *sen
                         perror("Erro ao abrir extrato.bin");
                         exit(EXIT_FAILURE);
                     }
-                    fprintf(file, "%s %s COMPRA - %.2f REAIS CT:%.2f   TX:%.2f \n",cpf, dataAtual, valor,criptomoeda[i].valor,criptomoeda[i].cotcomp);
+                    fprintf(file, "%s %s COMPRA - %.2f REAIS CT:%.2f   TX:%.2f \n",cpf, dataAtual, valor,cotacoes[i].valor,cotacoes[i].cotcomp);
                     fclose(file);
                     break;
                 } else if (confirma == 'n') {
@@ -70,6 +69,3 @@ void Comprar_criptomoedas(cotacao *criptomoeda,float *carteira,, const char *sen
             }
             break;
 
-
-
-          
