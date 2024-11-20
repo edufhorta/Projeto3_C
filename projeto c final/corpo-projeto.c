@@ -20,6 +20,12 @@ int main(){
     float cotcomp;
     } cotacao;
 
+    typedef struct{
+    char cpf[11];
+    cotacao moedas;
+    int num_moedas;
+} carteira;
+
   
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
