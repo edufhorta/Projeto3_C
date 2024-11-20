@@ -1,3 +1,4 @@
+#include "biblioteca.h"
 void copiarCpfsParaCarteira(carteira* carteiras, char cpf_lista[NUM_OF_USERS][MAX_CPF_LENGTH], int num_usuarios) {
     for (int i = 0; i < num_usuarios && i < NUM_OF_USERS; i++) {
         
