@@ -12,8 +12,8 @@ int main(){
     char senha[7];
     char cpf_lista[NUM_OF_USERS][12]={};
     char senha_lista[NUM_OF_USERS][7]={};
-
-
+    carteira carteiras[NUM_OF_USERS];
+    cotacao cotacoes[NUM_OF_USERS];
   
   iniciacao_arquivos(carteira,carteiraBit,carteiraEth,carteiraXrp, cpf_lista,senha_lista);
   int tipo_usuario = login_novo(&indice, cpf, senha, cpf_lista, senha_lista);
