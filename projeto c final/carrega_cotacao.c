@@ -1,9 +1,9 @@
 #include "biblioteca.h"
 
-int carrega_cotacao(const char *crip, cotacao **cotacoes){
-    FILE *arquivo = fopen("crip", "r"); // Abre o arquivo texto em modo leitura
+int carrega_cotacao(const char *cripto, cotacao **cotacoes){
+    FILE *arquivo = fopen("cripto", "r"); // Abre o arquivo texto em modo leitura
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo '%s'\n", crip);
+        printf("Erro ao abrir o arquivo '%s'\n", cripto);
         return -1; // Retorna -1 em caso de erro
     }
 
