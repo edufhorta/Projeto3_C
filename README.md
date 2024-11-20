@@ -6,7 +6,7 @@
 
 
 ## Objetivo do Projeto
-O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários podem comprar e vender Bitcoin, Ethereum e Ripple. A plataforma permite que os investidores gerenciem suas carteiras de forma segura e eficiente, com funcionalidades de login, consulta de saldo, extrato de transações, depósitos, saques e atualizações de cotação.
+O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários podem comprar e vender Bitcoin, Ethereum e Ripple. A plataforma permite que os investidores gerenciem suas carteiras de forma segura e eficiente, com funcionalidades de login, consulta de saldo, extrato de transações, depósitos, saques e atualizações de cotação. E agora adicionamos a função de administrador onde você pode cadastrar e excluir novos investidores, cadastrar e excluir criptomoedas, consultar o extrato ou a carteira de algum investidor. 
 
 ## Funcionalidades
 - Efetuar login usando CPF e senha.
@@ -17,10 +17,14 @@ O projeto consiste na criação de uma Exchange de Criptomoedas, onde usuários 
 - Comprar criptomoedas com confirmação de dados.
 - Vender criptomoedas com confirmação de dados.
 - Atualizar cotação das criptomoedas aleatoriamente.
+- Cadastrar e excluir investor.
+- Cadastrar e excluir criptomoedas.
+- Consultar extrato e carteira de um investidor.
 
 ## Forma de execução 
 - baixe a pasta "projeto c final" e depois coloque os arquivos no "replit" e se certifique que não estejam dentro da pasta, mas postos diretamente no programa e execute o "corpo-projeto".
 - Para entrar no programa digite um desses 10 logins (CPFS + senhas):
+- Caso queira entrar como administrador entre com esse login: CPF: 75764675332 // senha: 123456;
 1. CPF: 75764675332 // senha: 123456;
 2. CPF: 56394345628 // senha: 654321;
 3. CPF: 82347782002 // senha: 135792;
